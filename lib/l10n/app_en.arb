@@ -1,0 +1,59 @@
+{
+  "@@locale": "en",
+
+  "appName": "CarAds",
+
+  "signIn": "Sign In",
+  "signUp": "Sign Up",
+  "logout": "Log out",
+
+  "welcomeBack": "Welcome Back to CarAds!",
+  "signInSubtitle": "Sign in to your account and get back on track with CarAds",
+
+  "phoneNumber": "Phone Number",
+  "password": "Password",
+  "newPassword": "New Password",
+  "confirmPassword": "Confirm Password",
+  "fullName": "Full Name",
+  "emailAddress": "Email Address",
+
+  "forgotPassword": "Forgot Your Password?",
+  "forgotPasswordSubtitle": "No worries! We'll help you reset your password. Just enter your registered Phone Number, and we'll send you a code to reset your password.",
+
+  "send": "Send",
+  "verify": "Verify",
+  "confirm": "Confirm",
+
+  "verifyPhoneNumber": "Verify Your Phone Number",
+  "otpSentTo": "Please Enter The Otp Code Sent To {phone}",
+  "@otpSentTo": {
+    "placeholders": {
+      "phone": { "type": "String" }
+    }
+  },
+  "resendCodeIn": "Resend code in {seconds} s",
+  "@resendCodeIn": {
+    "placeholders": {
+      "seconds": { "type": "int" }
+    }
+  },
+  "resendCode": "Resend code",
+
+  "createNewPassword": "Create New Password",
+  "createNewPasswordSubtitle": "Your New Password Must Be Different From Previously Used Password",
+
+  "joinCarAds": "Join CarAds Today!",
+  "signUpSubtitle": "Create your account and become a part of CarAds community",
+
+  "orContinueWith": "or continue with",
+  "alreadyHaveAccount": "Already have an account?",
+  "dontHaveAccount": "Don't have an account?",
+
+  "verification": "verification",
+
+  "fieldRequired": "This field is required",
+  "invalidPhone": "Enter a valid phone number",
+  "invalidEmail": "Enter a valid email address",
+  "passwordTooShort": "Password must be at least 8 characters",
+  "passwordsDoNotMatch": "Passwords do not match"
+}

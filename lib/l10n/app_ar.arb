@@ -1,0 +1,59 @@
+{
+  "@@locale": "ar",
+
+  "appName": "كار آدز",
+
+  "signIn": "تسجيل الدخول",
+  "signUp": "إنشاء حساب",
+  "logout": "تسجيل الخروج",
+
+  "welcomeBack": "مرحباً بعودتك إلى كار آدز!",
+  "signInSubtitle": "سجّل الدخول إلى حسابك وتابع رحلتك مع كار آدز",
+
+  "phoneNumber": "رقم الهاتف",
+  "password": "كلمة المرور",
+  "newPassword": "كلمة المرور الجديدة",
+  "confirmPassword": "تأكيد كلمة المرور",
+  "fullName": "الاسم الكامل",
+  "emailAddress": "البريد الإلكتروني",
+
+  "forgotPassword": "نسيت كلمة المرور؟",
+  "forgotPasswordSubtitle": "لا تقلق! سنساعدك على إعادة تعيين كلمة المرور. أدخل رقم هاتفك المسجّل وسنرسل لك رمزاً لإعادة التعيين.",
+
+  "send": "إرسال",
+  "verify": "تحقق",
+  "confirm": "تأكيد",
+
+  "verifyPhoneNumber": "تحقق من رقم هاتفك",
+  "otpSentTo": "أدخل رمز التحقق المرسل إلى {phone}",
+  "@otpSentTo": {
+    "placeholders": {
+      "phone": { "type": "String" }
+    }
+  },
+  "resendCodeIn": "إعادة إرسال الرمز خلال {seconds} ث",
+  "@resendCodeIn": {
+    "placeholders": {
+      "seconds": { "type": "int" }
+    }
+  },
+  "resendCode": "إعادة إرسال الرمز",
+
+  "createNewPassword": "إنشاء كلمة مرور جديدة",
+  "createNewPasswordSubtitle": "يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمة المرور المستخدمة سابقاً",
+
+  "joinCarAds": "انضم إلى كار آدز اليوم!",
+  "signUpSubtitle": "أنشئ حسابك وكن جزءاً من مجتمع كار آدز",
+
+  "orContinueWith": "أو تابع بـ",
+  "alreadyHaveAccount": "لديك حساب بالفعل؟",
+  "dontHaveAccount": "ليس لديك حساب؟",
+
+  "verification": "التحقق",
+
+  "fieldRequired": "هذا الحقل مطلوب",
+  "invalidPhone": "أدخل رقم هاتف صحيح",
+  "invalidEmail": "أدخل بريداً إلكترونياً صحيحاً",
+  "passwordTooShort": "كلمة المرور يجب أن تكون 8 أحرف على الأقل",
+  "passwordsDoNotMatch": "كلمتا المرور غير متطابقتين"
+}

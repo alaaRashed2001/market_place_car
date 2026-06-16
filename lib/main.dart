@@ -1,0 +1,54 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:market_place_car/core/global/localization/locale/app_localizations_setup.dart';
+import 'package:market_place_car/presentation/controller/cubit/theme/theme_cubit.dart';
+import 'package:market_place_car/core/global/theme/theme_data/theme_data_dark.dart';
+import 'package:market_place_car/core/global/theme/theme_data/theme_data_light.dart';
+import 'package:market_place_car/core/injection_container.dart';
+import 'package:market_place_car/presentation/screens/onboarding/splash_screen.dart';
+import 'presentation/controller/bloc/locale/locale_bloc.dart';
+import 'presentation/controller/cubit/onboarding/onboarding_cubit.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initDependencies();
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => sl<ThemeCubit>()..loadSavedTheme()),
+        BlocProvider(create: (_) => sl<OnboardingCubit>()),
+        BlocProvider(create: (_) => sl<LocaleBloc>()..add(LoadSavedLocale())),
+      ],
+      child: BlocBuilder<ThemeCubit, ThemeState>(
+        builder: (context, themeState) {
+          return BlocBuilder<LocaleBloc, LocaleState>(
+            builder: (context, localeState) {
+              final locale = localeState is LocaleLoaded
+                  ? localeState.locale.toLocale()
+                  : const Locale('en');
+
+              return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: 'Market Place Car',
+                theme: getThemeDataLight(),
+                darkTheme: getThemeDataDark(),
+                themeMode: themeState.isDark ? ThemeMode.dark : ThemeMode.light,
+                locale: locale,
+                localizationsDelegates: appLocalizationDelegates,
+                supportedLocales: appSupportedLocales,
+                home: const SplashScreen(),
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+}
