@@ -12,6 +12,39 @@ class AppLocalizationsAr extends AppLocalizations {
   String get appName => 'كار آدز';
 
   @override
+  String get onboarding_title_1 => 'مرحباً بك في تطبيق CarAds';
+
+  @override
+  String get onboarding_description_1 =>
+      'CarAds هو وجهتك المثالية للإعلانات الخاصة بمعارض السيارات ومكاتب التأجير. سواء كنت مالك معرض سيارات أو تبحث عن استئجار مركبة، فإن منصتنا توفر لك كل ما تحتاجه.';
+
+  @override
+  String get onboarding_title_2 => 'إدارة الإعلانات بكل سهولة';
+
+  @override
+  String get onboarding_description_2 =>
+      'هل تمتلك معرض سيارات أو مكتب تأجير؟ أنشئ حسابك الخاص الآن! يمكنك إدارة إعلاناتك والترويج لها بسهولة من خلال بضع نقرات فقط، والوصول إلى جمهور أوسع واستقبال المزيد من الاستفسارات عبر CarAds.';
+
+  @override
+  String get onboarding_title_3 => 'استكشف خياراتك';
+
+  @override
+  String get onboarding_description_3 =>
+      'اكتشف مجموعة واسعة من إعلانات السيارات المصممة لتناسب احتياجاتك. تصفح مختلف موديلات السيارات، وعروض التأجير، والصفقات الحصرية المقدمة من المعارض المحلية عبر CarAds.';
+
+  @override
+  String get next => 'التالي';
+
+  @override
+  String get skip => 'تخطي';
+
+  @override
+  String get joinNowAsUser => 'انضم هلأ كمستخدم';
+
+  @override
+  String get joinNowAsShowroom => 'انضم هلأ كمعرض سيارات';
+
+  @override
   String get signIn => 'تسجيل الدخول';
 
   @override

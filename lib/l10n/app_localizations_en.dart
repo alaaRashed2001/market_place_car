@@ -12,6 +12,39 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appName => 'CarAds';
 
   @override
+  String get onboarding_title_1 => 'Welcome to CarAds App';
+
+  @override
+  String get onboarding_description_1 =>
+      'CarAds is your ultimate destination for car showrooms and rental offices advertising. Whether you\'re a car showroom owner or looking to rent a vehicle, our platform has got you covered!';
+
+  @override
+  String get onboarding_title_2 => 'Effortless Ads Management';
+
+  @override
+  String get onboarding_description_2 =>
+      'Are you a car showroom or rental office owner? Create your special account now! Easily manage and promote your ads within a few taps. Reach a broader audience and receive inquiries with CarAds.';
+
+  @override
+  String get onboarding_title_3 => 'Explore Your Options';
+
+  @override
+  String get onboarding_description_3 =>
+      'Discover a wide range of car advertisements tailored to your preferences. Browse through various car models, rental offers, and exclusive deals from local showrooms with CarAds.';
+
+  @override
+  String get next => 'Next';
+
+  @override
+  String get skip => 'Skip';
+
+  @override
+  String get joinNowAsUser => 'Join Now As A User';
+
+  @override
+  String get joinNowAsShowroom => 'Join Now As A Showroom';
+
+  @override
   String get signIn => 'Sign In';
 
   @override

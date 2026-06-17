@@ -104,6 +104,66 @@ abstract class AppLocalizations {
   /// **'CarAds'**
   String get appName;
 
+  /// No description provided for @onboarding_title_1.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to CarAds App'**
+  String get onboarding_title_1;
+
+  /// No description provided for @onboarding_description_1.
+  ///
+  /// In en, this message translates to:
+  /// **'CarAds is your ultimate destination for car showrooms and rental offices advertising. Whether you\'re a car showroom owner or looking to rent a vehicle, our platform has got you covered!'**
+  String get onboarding_description_1;
+
+  /// No description provided for @onboarding_title_2.
+  ///
+  /// In en, this message translates to:
+  /// **'Effortless Ads Management'**
+  String get onboarding_title_2;
+
+  /// No description provided for @onboarding_description_2.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you a car showroom or rental office owner? Create your special account now! Easily manage and promote your ads within a few taps. Reach a broader audience and receive inquiries with CarAds.'**
+  String get onboarding_description_2;
+
+  /// No description provided for @onboarding_title_3.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore Your Options'**
+  String get onboarding_title_3;
+
+  /// No description provided for @onboarding_description_3.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover a wide range of car advertisements tailored to your preferences. Browse through various car models, rental offers, and exclusive deals from local showrooms with CarAds.'**
+  String get onboarding_description_3;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
+
+  /// No description provided for @skip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get skip;
+
+  /// No description provided for @joinNowAsUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Join Now As A User'**
+  String get joinNowAsUser;
+
+  /// No description provided for @joinNowAsShowroom.
+  ///
+  /// In en, this message translates to:
+  /// **'Join Now As A Showroom'**
+  String get joinNowAsShowroom;
+
   /// No description provided for @signIn.
   ///
   /// In en, this message translates to:

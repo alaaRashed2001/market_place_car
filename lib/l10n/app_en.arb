@@ -3,6 +3,20 @@
 
   "appName": "CarAds",
 
+  "onboarding_title_1": "Welcome to CarAds App",
+  "onboarding_description_1": "CarAds is your ultimate destination for car showrooms and rental offices advertising. Whether you're a car showroom owner or looking to rent a vehicle, our platform has got you covered!",
+
+  "onboarding_title_2": "Effortless Ads Management",
+  "onboarding_description_2": "Are you a car showroom or rental office owner? Create your special account now! Easily manage and promote your ads within a few taps. Reach a broader audience and receive inquiries with CarAds.",
+
+  "onboarding_title_3": "Explore Your Options",
+  "onboarding_description_3": "Discover a wide range of car advertisements tailored to your preferences. Browse through various car models, rental offers, and exclusive deals from local showrooms with CarAds.",
+
+  "next": "Next",
+  "skip": "Skip",
+  "joinNowAsUser": "Join Now As A User",
+  "joinNowAsShowroom": "Join Now As A Showroom",
+
   "signIn": "Sign In",
   "signUp": "Sign Up",
   "logout": "Log out",

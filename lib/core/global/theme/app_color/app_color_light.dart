@@ -23,9 +23,8 @@ class AppColorLight {
   static const Color textOnPrimaryColor = Color(0xFFFFFFFF);
 
   // Button Colors
-  static const Color buttonPrimaryColor = Color(0xFFE94560);
-  static const Color buttonSecondaryColor = Color(0xFF1A1A2E);
-  static const Color buttonDisabledColor = Color(0xFFD1D5DB);
+  static const Color buttonPrimaryColor = Color(0xFF000000);
+  static const Color buttonDisabledColor = Color(0xFFE5E5E5);
 
   // Border & Divider Colors
   static const Color borderColor = Color(0xFFE5E7EB);

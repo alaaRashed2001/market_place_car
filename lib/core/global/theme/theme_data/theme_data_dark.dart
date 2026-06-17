@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:market_place_car/core/global/theme/app_color/app_color_dark.dart';
+import 'package:market_place_car/core/global/theme/app_typography/app_text_theme.dart';
 
 ThemeData getThemeDataDark() => ThemeData(
   brightness: Brightness.dark,
@@ -129,38 +130,5 @@ ThemeData getThemeDataDark() => ThemeData(
   ),
 
   // Text Theme
-  textTheme: const TextTheme(
-    displayLarge: TextStyle(
-        color: AppColorDark.textPrimaryColor,
-        fontWeight: FontWeight.bold,
-        fontSize: 32),
-    displayMedium: TextStyle(
-        color: AppColorDark.textPrimaryColor,
-        fontWeight: FontWeight.bold,
-        fontSize: 28),
-    displaySmall: TextStyle(
-        color: AppColorDark.textPrimaryColor,
-        fontWeight: FontWeight.bold,
-        fontSize: 24),
-    headlineMedium: TextStyle(
-        color: AppColorDark.textPrimaryColor,
-        fontWeight: FontWeight.w600,
-        fontSize: 20),
-    headlineSmall: TextStyle(
-        color: AppColorDark.textPrimaryColor,
-        fontWeight: FontWeight.w600,
-        fontSize: 18),
-    titleLarge: TextStyle(
-        color: AppColorDark.textPrimaryColor,
-        fontWeight: FontWeight.w600,
-        fontSize: 16),
-    titleMedium: TextStyle(
-        color: AppColorDark.textSecondaryColor, fontSize: 14),
-    bodyLarge: TextStyle(
-        color: AppColorDark.textPrimaryColor, fontSize: 16),
-    bodyMedium: TextStyle(
-        color: AppColorDark.textSecondaryColor, fontSize: 14),
-    bodySmall: TextStyle(
-        color: AppColorDark.textHintColor, fontSize: 12),
-  ),
+  textTheme: AppTextTheme.dark,
 );

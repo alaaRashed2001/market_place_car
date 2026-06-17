@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_place_car/core/constants/app_images.dart';
+import 'package:market_place_car/core/extension/sized_box_extension.dart';
+import 'package:market_place_car/core/global/localization/locale/app_localizations_setup.dart';
 import 'package:market_place_car/core/helper/navigator_helper.dart';
+import 'package:market_place_car/core/widgets/app_primary_button.dart';
+import 'package:market_place_car/core/widgets/app_text_button.dart';
 import 'package:market_place_car/presentation/controller/cubit/onboarding/onboarding_cubit.dart';
 import 'package:market_place_car/presentation/screens/auth/login_screen.dart';
 
@@ -27,26 +31,26 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
 
-  final List<OnboardingPageModel> _slides = [
-    OnboardingPageModel(
-      title: "Welcome to CarAds App",
-      description:
-          "CarAds is your ultimate destination for car showrooms and rental offices advertising. Whether you're a car showroom owner or looking to rent a vehicle, our platform has got you covered!",
-      image: AppImages.onboarding1,
-    ),
-    OnboardingPageModel(
-      title: "Effortless Ads Management",
-      description:
-          "Are you a car showroom or rental office owner? Create your special account now! Easily manage and promote your ads within a few taps. Reach a broader audience, receive inquiries with CarAds",
-      image: AppImages.onboarding2,
-    ),
-    OnboardingPageModel(
-      title: "Explore Your Options",
-      description:
-          "Discover a wide range of car advertisements tailored to your preferences. Browse through various car models, rental offers, and exclusive deals from local showrooms. With CarAds",
-      image: AppImages.onboarding3,
-    ),
-  ];
+  List<OnboardingPageModel> _getSlides(BuildContext context) {
+    final l = context.l10n;
+    return [
+      OnboardingPageModel(
+        title: l.onboarding_title_1,
+        description: l.onboarding_description_1,
+        image: AppImages.onboarding1,
+      ),
+      OnboardingPageModel(
+        title: l.onboarding_title_2,
+        description: l.onboarding_description_2,
+        image: AppImages.onboarding2,
+      ),
+      OnboardingPageModel(
+        title: l.onboarding_title_3,
+        description: l.onboarding_description_3,
+        image: AppImages.onboarding3,
+      ),
+    ];
+  }
 
   @override
   void dispose() {
@@ -54,8 +58,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     super.dispose();
   }
 
+  static const int _slidesCount = 3;
   void _onNext(OnboardingCubit cubit, int currentPage) {
-    if (currentPage < _slides.length - 1) {
+    if (currentPage < _slidesCount - 1) {
       _pageController.animateToPage(
         currentPage + 1,
         duration: const Duration(milliseconds: 400),
@@ -70,6 +75,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final slides = _getSlides(context);
     return BlocConsumer<OnboardingCubit, OnboardingState>(
       listener: (context, state) {
         if (state is OnboardingCompleted) {
@@ -83,202 +89,131 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       builder: (context, state) {
         final cubit = context.read<OnboardingCubit>();
         final currentPage = cubit.currentPage;
-        final isLastPage = currentPage == _slides.length - 1;
+        final isLastPage = currentPage == slides.length - 1;
 
         return Scaffold(
-          backgroundColor: Colors.white,
-          body: SafeArea(
-            child: Column(
-              children: [
-                // ── Page View ──────────────────────────────────────
-                Expanded(
-                  child: PageView.builder(
-                    controller: _pageController,
-                    itemCount: _slides.length,
-                    onPageChanged: cubit.onPageChanged,
-                    itemBuilder: (context, index) {
-                      final slide = _slides[index];
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-                        child: Column(
-                          children: [
-                            const SizedBox(height: 32),
-                            // Image
-                            Expanded(
-                              flex: 3,
-                              child: Image.asset(
-                                slide.image,
-                                fit: BoxFit.contain,
-                              ),
-                            ),
-                            const SizedBox(height: 32),
-                            // Title
-                            Text(
-                              slide.title,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.w700,
-                                color: Color(0xFF1A1A2E),
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                            // Description
-                            Text(
-                              slide.description,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                fontSize: 14,
-                                color: Color(0xFF6B7280),
-                                height: 1.6,
-                              ),
-                            ),
-                            const SizedBox(height: 24),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ),
+          body: Column(
+            children: [
+              Expanded(
+                child: PageView.builder(
+                  controller: _pageController,
+                  itemCount: slides.length,
 
-                // ── Dots Indicator ─────────────────────────────────
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(_slides.length, (index) {
-                    return AnimatedContainer(
-                      duration: const Duration(milliseconds: 300),
-                      width: currentPage == index ? 24 : 8,
-                      height: 8,
-                      margin: const EdgeInsets.symmetric(horizontal: 4),
-                      decoration: BoxDecoration(
-                        color: currentPage == index
-                            ? const Color(0xFF1A1A2E)
-                            : const Color(0xFFD1D5DB),
-                        borderRadius: BorderRadius.circular(10),
+                  onPageChanged: cubit.onPageChanged,
+                  itemBuilder: (context, index) {
+                    final slide = slides[index];
+                    return Padding(
+                      padding: const EdgeInsetsDirectional.only(
+                        start: 20,
+                        end: 20,
+                        bottom: 32,
+                        top: 124,
+                      ),
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            slide.image,
+                            fit: BoxFit.contain,
+                            width: 254.7391357421875,
+                            height: 189,
+                          ),
+                          32.height,
+                          Text(
+                            slide.title,
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.headlineMedium,
+                          ),
+                          24.height,
+                          Text(
+                            slide.description,
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                        ],
                       ),
                     );
-                  }),
+                  },
                 ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(slides.length, (index) {
+                  return AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    width: currentPage == index ? 35 : 8,
+                    height: 9,
+                    margin: const EdgeInsets.symmetric(horizontal: 4),
+                    padding: const EdgeInsetsDirectional.only(top: 32),
+                    decoration: BoxDecoration(
+                      color: currentPage == index
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(
+                              context,
+                            ).colorScheme.surfaceContainerHighest,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  );
+                }),
+              ),
 
-                const SizedBox(height: 32),
-
-                // ── Bottom Buttons ─────────────────────────────────
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: isLastPage
-                      ? _buildLastPageButtons(cubit)
-                      : _buildNavButtons(cubit, currentPage),
+              Padding(
+                padding: const EdgeInsetsDirectional.only(
+                  start: 20,
+                  end: 20,
+                  top: 40,
+                  bottom: 90,
                 ),
-
-                const SizedBox(height: 24),
-              ],
-            ),
+                child: isLastPage
+                    ? _buildLastPageButtons(context, cubit)
+                    : _buildNavButtons(context, cubit, currentPage),
+              ),
+            ],
           ),
         );
       },
     );
   }
 
-  Widget _buildNavButtons(OnboardingCubit cubit, int currentPage) {
+  Widget _buildNavButtons(
+    BuildContext context,
+    OnboardingCubit cubit,
+    int currentPage,
+  ) {
+    final l = context.l10n;
     return Column(
+      spacing: 16,
       children: [
-        // Next Button
-        SizedBox(
-          width: double.infinity,
-          height: 52,
-          child: ElevatedButton(
-            onPressed: () => _onNext(cubit, currentPage),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF1A1A2E),
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            child: const Text(
-              'Next',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-            ),
-          ),
+        AppPrimaryButton(
+          text: l.next,
+          onPressed: () => _onNext(cubit, currentPage),
         ),
-        const SizedBox(height: 12),
-        // Skip Button
-        TextButton(
-          onPressed: () => _onSkip(cubit),
-          child: const Text(
-            'Skip',
-            style: TextStyle(
-              fontSize: 15,
-              color: Color(0xFF6B7280),
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
+
+        AppTextButton(text: l.skip, onPressed: () => _onSkip(cubit)),
       ],
     );
   }
 
-  Widget _buildLastPageButtons(OnboardingCubit cubit) {
+  Widget _buildLastPageButtons(BuildContext context, OnboardingCubit cubit) {
+    final l = context.l10n;
     return Column(
+      spacing: 16,
       children: [
-        // Join as User
-        SizedBox(
-          width: double.infinity,
-          height: 52,
-          child: ElevatedButton(
-            onPressed: () {
-              cubit.completeOnboarding();
-              // TODO: Navigate to RegisterUserScreen
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF1A1A2E),
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            child: const Text(
-              'Join Now As A User',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-            ),
-          ),
+        AppPrimaryButton(
+          text: l.joinNowAsUser,
+          onPressed: () {
+            cubit.completeOnboarding();
+            // TODO: Navigate to RegisterUserScreen
+          },
         ),
-        const SizedBox(height: 12),
-        // Join as Showroom
-        SizedBox(
-          width: double.infinity,
-          height: 52,
-          child: OutlinedButton(
-            onPressed: () {
-              cubit.completeOnboarding();
-              // TODO: Navigate to RegisterShowroomScreen
-            },
-            style: OutlinedButton.styleFrom(
-              foregroundColor: const Color(0xFF1A1A2E),
-              side: const BorderSide(color: Color(0xFF1A1A2E), width: 2),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            child: const Text(
-              'Join Now As A Showrooms',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-            ),
-          ),
+
+        AppPrimaryButton(
+          text: l.joinNowAsShowroom,
+          onPressed: () {
+            cubit.completeOnboarding();
+            // TODO: Navigate to RegisterShowroomScreen
+          },
         ),
-        const SizedBox(height: 12),
-        // Skip
-        TextButton(
-          onPressed: () => _onSkip(cubit),
-          child: const Text(
-            'Skip',
-            style: TextStyle(
-              fontSize: 15,
-              color: Color(0xFF6B7280),
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
+        AppTextButton(text: l.skip, onPressed: () => _onSkip(cubit)),
       ],
     );
   }

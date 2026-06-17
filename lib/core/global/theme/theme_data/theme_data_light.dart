@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:market_place_car/core/global/theme/app_color/app_color_light.dart';
+import 'package:market_place_car/core/global/theme/app_typography/app_text_theme.dart';
 
 ThemeData getThemeDataLight() => ThemeData(
   brightness: Brightness.light,
@@ -44,11 +45,17 @@ ThemeData getThemeDataLight() => ThemeData(
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: AppColorLight.buttonPrimaryColor,
-      foregroundColor: AppColorLight.textOnPrimaryColor,
       disabledBackgroundColor: AppColorLight.buttonDisabledColor,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-      textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+      foregroundColor: AppColorLight.textOnPrimaryColor,
+      elevation: 0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      textStyle: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w800,
+        fontFamily: 'Avenir Arabic',
+        height: 1.0,
+      ),
     ),
   ),
 
@@ -117,46 +124,5 @@ ThemeData getThemeDataLight() => ThemeData(
   ),
 
   // Text Theme
-  textTheme: const TextTheme(
-    displayLarge: TextStyle(
-      color: AppColorLight.textPrimaryColor,
-      fontWeight: FontWeight.bold,
-      fontSize: 32,
-    ),
-    displayMedium: TextStyle(
-      color: AppColorLight.textPrimaryColor,
-      fontWeight: FontWeight.bold,
-      fontSize: 28,
-    ),
-    displaySmall: TextStyle(
-      color: AppColorLight.textPrimaryColor,
-      fontWeight: FontWeight.bold,
-      fontSize: 24,
-    ),
-    headlineMedium: TextStyle(
-      color: AppColorLight.textPrimaryColor,
-      fontWeight: FontWeight.w600,
-      fontSize: 20,
-    ),
-    headlineSmall: TextStyle(
-      color: AppColorLight.textPrimaryColor,
-      fontWeight: FontWeight.w600,
-      fontSize: 18,
-    ),
-    titleLarge: TextStyle(
-      color: AppColorLight.textPrimaryColor,
-      fontWeight: FontWeight.w600,
-      fontSize: 16,
-    ),
-    titleMedium: TextStyle(
-      color: AppColorLight.textSecondaryColor,
-      fontSize: 14,
-    ),
-    bodyLarge: TextStyle(color: AppColorLight.textPrimaryColor, fontSize: 16),
-    bodyMedium: TextStyle(
-      color: AppColorLight.textSecondaryColor,
-      fontSize: 14,
-    ),
-    bodySmall: TextStyle(color: AppColorLight.textHintColor, fontSize: 12),
-  ),
+  textTheme: AppTextTheme.light,
 );
