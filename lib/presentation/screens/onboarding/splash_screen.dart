@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_place_car/core/constants/app_images.dart';
 import 'package:market_place_car/data/services/service_locator.dart';
+import 'package:market_place_car/presentation/controller/cubit/onboarding/onboarding_state.dart';
 import 'package:market_place_car/presentation/helper/navigator_helper.dart';
 import 'package:market_place_car/presentation/screens/auth/login_screen.dart';
 import 'package:market_place_car/presentation/screens/onboarding/onboarding_screen.dart';
@@ -34,7 +36,10 @@ class _SplashScreenState extends State<SplashScreen> {
     } else {
       NavigatorHelper.jump(
         context,
-        screen: const OnboardingScreen(),
+        screen: BlocProvider(
+          create: (context) => sl<OnboardingCubit>(),
+          child: const OnboardingScreen(),
+        ),
         replace: true,
       );
     }

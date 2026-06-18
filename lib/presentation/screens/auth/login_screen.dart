@@ -6,7 +6,11 @@ import 'package:market_place_car/core/global/localization/locale/app_localizatio
 import 'package:market_place_car/presentation/components/shared_component/app_bottom_sheet.dart';
 import 'package:market_place_car/presentation/components/auth/auth_text_field.dart';
 import 'package:market_place_car/presentation/components/auth/country_picker_bottom_sheet.dart';
+import 'package:market_place_car/presentation/components/shared_component/app_primary_button.dart';
 import 'package:market_place_car/presentation/helper/app_asset_helper.dart';
+import 'package:market_place_car/presentation/helper/navigator_helper.dart';
+import 'package:market_place_car/presentation/screens/auth/verify_signup_otp_screen.dart';
+import 'package:market_place_car/presentation/screens/main_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -124,6 +128,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                 ],
+              ),
+            ),
+            16.height,
+            TextButton(
+              onPressed: () =>
+                  NavigatorHelper.jump(context, screen: OtpVerificationPage()),
+              child: Text("Forgot Your Password?"),
+            ),
+            24.height,
+            AppPrimaryButton(
+              text: "Login",
+              onPressed: () => NavigatorHelper.jump(
+                context,
+                screen: MainScreen(),
+                replace: true,
               ),
             ),
           ],

@@ -1,48 +1,146 @@
 import 'package:flutter/material.dart';
+import 'package:market_place_car/core/extension/opacity_of_color.dart';
 import 'package:market_place_car/core/global/theme/app_color/app_colors.dart';
 
 class AppTheme {
   static const AppColors darkColors = AppColorDark();
   static const AppColors lightColors = AppColorLight();
+  static const String _defaultFont = 'SF Pro Display';
 
+  static TextStyle _style({
+    required double fontSize,
+    required FontWeight fontWeight,
+    required double lineHeight,
+    required Color textColor,
+    required String fontFamily,
+  }) {
+    return TextStyle(
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      color: textColor,
+      fontFamily: fontFamily,
+      height: lineHeight / fontSize,
+    );
+  }
+
+  static TextTheme _buildTextTheme({
+    required Color textColor,
+    required String fontFamily,
+  }) {
+    TextStyle create(double size, FontWeight weight, double lineHeight) {
+      return _style(
+        fontSize: size,
+        fontWeight: weight,
+        lineHeight: lineHeight,
+        textColor: textColor,
+        fontFamily: fontFamily,
+      );
+    }
+
+    return TextTheme(
+      displayLarge:  create(34, FontWeight.w700, 40),
+      displayMedium: create(34, FontWeight.w400, 40),
+      displaySmall:  create(28, FontWeight.w700, 32),
+      headlineLarge: create(28, FontWeight.w400, 32),
+      headlineMedium: create(26, FontWeight.w700, 30),
+      headlineSmall:  create(26, FontWeight.w400, 30),
+      titleLarge:     create(22, FontWeight.w700, 28),
+      titleMedium:    create(22, FontWeight.w400, 28),
+      titleSmall:     create(18, FontWeight.w700, 24),
+      bodyLarge:      create(18, FontWeight.w400, 24),
+      labelLarge:     create(16, FontWeight.w700, 24),
+      labelMedium:    create(16, FontWeight.w400, 24),
+      bodyMedium:     create(16, FontWeight.w700, 24),
+      bodySmall:      create(16, FontWeight.w400, 24),
+      labelSmall:     create(14, FontWeight.w700, 20),
+    );
+  }
+
+  static ElevatedButtonThemeData _getButtonTheme({
+    required Color backgroundColor,
+    required Color textColor,
+    required String fontFamily,
+  }) {
+    return ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: backgroundColor,
+        foregroundColor: textColor,
+        fixedSize: const Size(350, 48),
+        disabledBackgroundColor: backgroundColor.changeOpacity(0.5),
+        elevation: 0,
+        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        textStyle: _style(
+          fontSize: 16,
+          fontWeight: FontWeight.w800,
+          lineHeight: 24,
+          textColor: textColor,
+          fontFamily: fontFamily,
+        ),
+      ),
+    );
+  }
+
+  static BottomNavigationBarThemeData _getBottomNavTheme({
+    required Color backgroundColor,
+    required Color activeColor,
+    required Color inactiveColor,
+    required String fontFamily,
+  }) {
+    return BottomNavigationBarThemeData(
+      backgroundColor: backgroundColor,
+      selectedItemColor: activeColor,
+      unselectedItemColor: inactiveColor,
+      type: BottomNavigationBarType.fixed,
+      elevation: 0,
+      selectedLabelStyle: _style(
+        fontSize: 12,
+        fontWeight: FontWeight.w900,
+        lineHeight: 12,
+        textColor: activeColor,
+        fontFamily: fontFamily,
+      ),
+      unselectedLabelStyle: _style(
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
+        lineHeight: 12,
+        textColor: inactiveColor,
+        fontFamily: fontFamily,
+      ),
+      selectedIconTheme: const IconThemeData(size: 24),
+      unselectedIconTheme: const IconThemeData(size: 24),
+    );
+  }
+
+  // (Dark Theme)
   static ThemeData get darkTheme {
     return ThemeData(
       brightness: Brightness.dark,
       primaryColor: darkColors.primaryColor,
       scaffoldBackgroundColor: darkColors.backgroundColor,
       cardColor: darkColors.cardColor,
-      dividerColor: darkColors.dividerColor,
-
-      // ثيم الـ AppBar
+      textTheme: _buildTextTheme(textColor: darkColors.textPrimaryColor, fontFamily: _defaultFont),
       appBarTheme: AppBarTheme(
         backgroundColor: darkColors.appBarColor,
         iconTheme: IconThemeData(color: darkColors.appBarIconColor),
-        titleTextStyle: TextStyle(color: darkColors.appBarTitleColor, fontSize: 20, fontWeight: FontWeight.bold),
+        titleTextStyle: _style(fontSize: 20, fontWeight: FontWeight.bold, lineHeight: 24, textColor: darkColors.appBarTitleColor, fontFamily: _defaultFont),
         elevation: 0,
       ),
-
-      // ثيم النصوص
-      textTheme: TextTheme(
-        bodyLarge: TextStyle(color: darkColors.textPrimaryColor),
-        bodyMedium: TextStyle(color: darkColors.textSecondaryColor),
+      elevatedButtonTheme: _getButtonTheme(
+        backgroundColor: darkColors.buttonBackgroundColor,
+        textColor: darkColors.buttonTextColor,
+        fontFamily: _defaultFont,
       ),
-
-      // ثيم الأزرار
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: darkColors.buttonPrimaryColor,
-          foregroundColor: darkColors.textOnPrimaryColor,
-        ),
+      colorScheme: const ColorScheme.dark().copyWith(
+        primary: darkColors.activeDotColor,
+        surfaceContainerHighest: darkColors.inactiveDotColor,
       ),
-
-      // ثيم الـ Bottom Navigation Bar
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      bottomNavigationBarTheme: _getBottomNavTheme(
         backgroundColor: darkColors.bottomNavBackgroundColor,
-        selectedItemColor: darkColors.bottomNavActiveColor,
-        unselectedItemColor: darkColors.bottomNavInactiveColor,
+        activeColor: darkColors.bottomNavActiveColor,
+        inactiveColor: darkColors.bottomNavInactiveColor,
+        fontFamily: _defaultFont,
       ),
-
-      // ثيم حقول الإدخال (TextField)
       inputDecorationTheme: InputDecorationTheme(
         fillColor: darkColors.inputFillColor,
         filled: true,
@@ -52,39 +150,35 @@ class AppTheme {
     );
   }
 
+  // (Light Theme)
   static ThemeData get lightTheme {
     return ThemeData(
       brightness: Brightness.light,
       primaryColor: lightColors.primaryColor,
       scaffoldBackgroundColor: lightColors.backgroundColor,
       cardColor: lightColors.cardColor,
-      dividerColor: lightColors.dividerColor,
-
+      textTheme: _buildTextTheme(textColor: lightColors.textPrimaryColor, fontFamily: _defaultFont),
       appBarTheme: AppBarTheme(
         backgroundColor: lightColors.appBarColor,
         iconTheme: IconThemeData(color: lightColors.appBarIconColor),
-        titleTextStyle: TextStyle(color: lightColors.appBarTitleColor, fontSize: 20, fontWeight: FontWeight.bold),
+        titleTextStyle: _style(fontSize: 20, fontWeight: FontWeight.bold, lineHeight: 24, textColor: lightColors.appBarTitleColor, fontFamily: _defaultFont),
         elevation: 0,
       ),
-
-      textTheme: TextTheme(
-        bodyLarge: TextStyle(color: lightColors.textPrimaryColor),
-        bodyMedium: TextStyle(color: lightColors.textSecondaryColor),
+      elevatedButtonTheme: _getButtonTheme(
+        backgroundColor: lightColors.buttonBackgroundColor,
+        textColor: lightColors.buttonTextColor,
+        fontFamily: _defaultFont,
       ),
-
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: lightColors.buttonPrimaryColor,
-          foregroundColor: lightColors.textOnPrimaryColor,
-        ),
+      colorScheme: const ColorScheme.light().copyWith(
+        primary: lightColors.activeDotColor,
+        surfaceContainerHighest: lightColors.inactiveDotColor,
       ),
-
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      bottomNavigationBarTheme: _getBottomNavTheme(
         backgroundColor: lightColors.bottomNavBackgroundColor,
-        selectedItemColor: lightColors.bottomNavActiveColor,
-        unselectedItemColor: lightColors.bottomNavInactiveColor,
+        activeColor: lightColors.bottomNavActiveColor,
+        inactiveColor: lightColors.bottomNavInactiveColor,
+        fontFamily: _defaultFont,
       ),
-
       inputDecorationTheme: InputDecorationTheme(
         fillColor: lightColors.inputFillColor,
         filled: true,

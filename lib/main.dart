@@ -4,6 +4,7 @@ import 'package:market_place_car/core/global/localization/locale/app_localizatio
 import 'package:market_place_car/core/global/theme/theme_data/app_theme.dart';
 import 'package:market_place_car/data/services/service_locator.dart';
 import 'package:market_place_car/presentation/controller/cubit/locale/locale_state.dart';
+import 'package:market_place_car/presentation/controller/cubit/onboarding/onboarding_state.dart';
 import 'package:market_place_car/presentation/controller/cubit/theme/theme_state.dart';
 import 'package:market_place_car/presentation/screens/onboarding/splash_screen.dart';
 
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => sl<ThemeCubit>()..loadSavedTheme()),
         BlocProvider(create: (_) => sl<LocaleCubit>()..loadSavedLocale()),
+        BlocProvider(create: (_) => sl<OnboardingCubit>()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, themeState) {

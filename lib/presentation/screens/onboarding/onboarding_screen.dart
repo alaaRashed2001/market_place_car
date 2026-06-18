@@ -35,9 +35,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   List<OnboardingPageModel> _getSlides(BuildContext context) {
     final l = context.l10n;
     return [
-      OnboardingPageModel(title: l.onboarding_title_1, description: l.onboarding_description_1, image: AppImages.onboarding1),
-      OnboardingPageModel(title: l.onboarding_title_2, description: l.onboarding_description_2, image: AppImages.onboarding2),
-      OnboardingPageModel(title: l.onboarding_title_3, description: l.onboarding_description_3, image: AppImages.onboarding3),
+      OnboardingPageModel(
+        title: l.onboarding_title_1,
+        description: l.onboarding_description_1,
+        image: AppImages.onboarding1,
+      ),
+      OnboardingPageModel(
+        title: l.onboarding_title_2,
+        description: l.onboarding_description_2,
+        image: AppImages.onboarding2,
+      ),
+      OnboardingPageModel(
+        title: l.onboarding_title_3,
+        description: l.onboarding_description_3,
+        image: AppImages.onboarding3,
+      ),
     ];
   }
 
@@ -63,7 +75,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return BlocConsumer<OnboardingCubit, OnboardingState>(
       listener: (context, state) {
         if (state is OnboardingCompleted) {
-          NavigatorHelper.jump(context, screen: const LoginScreen(), replace: true);
+          NavigatorHelper.jump(
+            context,
+            screen: const LoginScreen(),
+            replace: true,
+          );
         }
       },
       builder: (context, state) {
@@ -82,40 +98,68 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   itemBuilder: (context, index) {
                     final slide = slides[index];
                     return Padding(
-                      padding: const EdgeInsetsDirectional.only(start: 20, end: 20, bottom: 32, top: 124),
+                      padding: const EdgeInsetsDirectional.only(
+                        start: 20,
+                        end: 20,
+                        top: 124,
+                      ),
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Image.asset(slide.image, fit: BoxFit.contain, width: 254.7, height: 189),
+                          Image.asset(
+                            slide.image,
+                            fit: BoxFit.contain,
+                            width: double.infinity,
+                            height: 189,
+                          ),
                           32.height,
-                          Text(slide.title, textAlign: TextAlign.center, style: Theme.of(context).textTheme.headlineMedium),
+                          Text(
+                            slide.title,
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.headlineMedium,
+                            maxLines: 1,
+                          ),
+
                           24.height,
-                          Text(slide.description, textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodySmall),
+                          Text(
+                            slide.description,
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.bodySmall,
+                            maxLines: 3,
+                          ),
                         ],
                       ),
                     );
                   },
                 ),
               ),
-              // Indicators
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(slides.length, (index) {
+                  final isSelected = currentPage == index;
                   return AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
-                    width: currentPage == index ? 35 : 8,
+                    width: isSelected ? 35 : 9,
                     height: 9,
-                    margin: const EdgeInsets.symmetric(horizontal: 4),
+                    margin: const EdgeInsets.symmetric(horizontal: 2),
                     decoration: BoxDecoration(
-                      color: currentPage == index
+                      color: isSelected
                           ? Theme.of(context).colorScheme.primary
-                          : Theme.of(context).colorScheme.surfaceContainerHighest,
-                      borderRadius: BorderRadius.circular(10),
+                          : Theme.of(
+                              context,
+                            ).colorScheme.surfaceContainerHighest,
+                      borderRadius: BorderRadius.circular(23.11),
                     ),
                   );
                 }),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.only(start: 20, end: 20, top: 40, bottom: 90),
+                padding: const EdgeInsetsDirectional.only(
+                  start: 20,
+                  end: 20,
+                  top: 40,
+                ),
                 child: isLastPage
                     ? _buildLastPageButtons(context, cubit)
                     : _buildNavButtons(context, cubit, currentPage),
@@ -127,7 +171,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-  Widget _buildNavButtons(BuildContext context, OnboardingCubit cubit, int currentPage) {
+  Widget _buildNavButtons(
+    BuildContext context,
+    OnboardingCubit cubit,
+    int currentPage,
+  ) {
     final l = context.l10n;
     return Column(
       spacing: 16,
@@ -143,8 +191,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Column(
       spacing: 16,
       children: [
-        AppPrimaryButton(text: l.joinNowAsUser, onPressed: cubit.completeOnboarding),
-        AppPrimaryButton(text: l.joinNowAsShowroom, onPressed: cubit.completeOnboarding),
+        AppPrimaryButton(
+          text: l.joinNowAsUser,
+          onPressed: cubit.completeOnboarding,
+        ),
+        AppPrimaryButton(
+          text: l.joinNowAsShowroom,
+          onPressed: cubit.completeOnboarding,
+        ),
         AppTextButton(text: l.skip, onPressed: cubit.completeOnboarding),
       ],
     );
