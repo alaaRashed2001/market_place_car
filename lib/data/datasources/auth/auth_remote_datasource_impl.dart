@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:market_place_car/core/network/api_endpoints.dart';
 import 'package:market_place_car/data/datasources/auth/auth_remote_datasource.dart';
-import 'package:market_place_car/data/models/auth/user_model.dart';
+import 'package:market_place_car/data/dto/auth/user_model.dart';
+import 'package:market_place_car/data/network/api_endpoints.dart';
+
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final Dio _dio;

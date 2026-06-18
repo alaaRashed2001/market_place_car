@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:market_place_car/domain/entities/auth/user_entity.dart';
-import 'package:market_place_car/domain/failures/auth/auth_failure.dart';
-
+import 'package:market_place_car/domain/failure/auth_failure.dart';
 abstract class AuthRepository {
   Future<Either<AuthFailure, UserEntity>> login({
     required String phoneNumber,

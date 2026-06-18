@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:market_place_car/data/datasources/auth/auth_remote_datasource.dart';
 import 'package:market_place_car/domain/entities/auth/user_entity.dart';
-import 'package:market_place_car/domain/failures/auth/auth_failure.dart';
+import 'package:market_place_car/domain/failure/auth_failure.dart';
 import 'package:market_place_car/domain/repositories/auth/auth_repository.dart';
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource _remoteDataSource;

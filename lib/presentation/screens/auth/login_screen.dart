@@ -3,10 +3,10 @@ import 'package:intl_phone_field/countries.dart';
 import 'package:market_place_car/core/constants/app_images.dart';
 import 'package:market_place_car/core/extension/sized_box_extension.dart';
 import 'package:market_place_car/core/global/localization/locale/app_localizations_setup.dart';
-import 'package:market_place_car/core/helper/app_asset_helper.dart';
-import 'package:market_place_car/core/widgets/app_bottom_sheet.dart';
-import 'package:market_place_car/presentation/widgets/auth/auth_text_field.dart';
-import 'package:market_place_car/presentation/widgets/auth/country_picker_bottom_sheet.dart';
+import 'package:market_place_car/presentation/components/shared_component/app_bottom_sheet.dart';
+import 'package:market_place_car/presentation/components/auth/auth_text_field.dart';
+import 'package:market_place_car/presentation/components/auth/country_picker_bottom_sheet.dart';
+import 'package:market_place_car/presentation/helper/app_asset_helper.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

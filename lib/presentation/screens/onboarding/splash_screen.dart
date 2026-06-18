@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:market_place_car/core/constants/app_images.dart';
-import 'package:market_place_car/core/helper/navigator_helper.dart';
-import 'package:market_place_car/core/injection_container.dart';
-import 'package:market_place_car/domain/usecases/onboarding/is_onboarding_seen_usecase.dart';
+import 'package:market_place_car/data/services/service_locator.dart';
+import 'package:market_place_car/presentation/helper/navigator_helper.dart';
 import 'package:market_place_car/presentation/screens/auth/login_screen.dart';
 import 'package:market_place_car/presentation/screens/onboarding/onboarding_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -21,11 +21,12 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _init() async {
-    // Show splash for 3 seconds
     await Future.delayed(const Duration(seconds: 3));
     if (!mounted) return;
 
-    final isOnboardingSeen = await sl<IsOnboardingSeenUseCase>().call();
+    final prefs = sl<SharedPreferences>();
+    final isOnboardingSeen = prefs.getBool('IS_ONBOARDING_SEEN') ?? false;
+
     if (!mounted) return;
 
     if (isOnboardingSeen) {
@@ -43,6 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         spacing: 24,
         children: [
           Image.asset(AppImages.splash, width: 704, height: 566.015625),

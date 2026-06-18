@@ -1,4 +1,5 @@
-import 'package:market_place_car/data/models/auth/user_model.dart';
+
+import 'package:market_place_car/data/dto/auth/user_model.dart';
 
 abstract class AuthRemoteDataSource {
   Future<UserModel> login({

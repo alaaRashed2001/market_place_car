@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:market_place_car/domain/failures/auth/auth_failure.dart';
+import 'package:market_place_car/domain/failure/auth_failure.dart';
 import 'package:market_place_car/domain/repositories/auth/auth_repository.dart';
 class ForgotPasswordUseCase {
   final AuthRepository _repository;
