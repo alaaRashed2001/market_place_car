@@ -1,7 +1,7 @@
 import 'package:market_place_car/domain/entities/auth/user_entity.dart';
 
-class UserModel extends UserEntity {
-  const UserModel({
+class UseDto extends UserEntity {
+  const UseDto({
     required super.id,
     required super.fullName,
     required super.email,
@@ -9,7 +9,7 @@ class UserModel extends UserEntity {
     super.token,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+  factory UseDto.fromJson(Map<String, dynamic> json) => UseDto(
         id: json['id'] as String,
         fullName: json['full_name'] as String,
         email: json['email'] as String,
@@ -17,11 +17,4 @@ class UserModel extends UserEntity {
         token: json['token'] as String?,
       );
 
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'full_name': fullName,
-        'email': email,
-        'phone_number': phoneNumber,
-        'token': token,
-      };
 }

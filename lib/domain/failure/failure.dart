@@ -10,3 +10,23 @@ abstract class Failure extends Equatable {
 class ServerFailure extends Failure {
   const ServerFailure(super.message);
 }
+
+class InvalidCredentialsFailure extends Failure {
+  const InvalidCredentialsFailure(super.message);
+}
+
+class PhoneNotFoundFailure extends Failure {
+  const PhoneNotFoundFailure(super.message);
+}
+
+class OtpExpiredFailure extends Failure {
+  const OtpExpiredFailure(super.message);
+}
+
+class OtpInvalidFailure extends Failure {
+  const OtpInvalidFailure(super.message);
+}
+
+class NetworkFailure extends Failure {
+  const NetworkFailure(super.message);
+}

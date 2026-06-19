@@ -1,8 +1,7 @@
-
-import 'package:market_place_car/data/dto/auth/user_model.dart';
+import 'package:market_place_car/data/dto/auth/user_dto.dart';
 
 abstract class AuthRemoteDataSource {
-  Future<UserModel> login({
+  Future<UseDto> login({
     required String phoneNumber,
     required String password,
   });
@@ -19,7 +18,7 @@ abstract class AuthRemoteDataSource {
     required String newPassword,
   });
 
-  Future<UserModel> signUp({
+  Future<UseDto> signUp({
     required String fullName,
     required String email,
     required String phoneNumber,
@@ -29,5 +28,10 @@ abstract class AuthRemoteDataSource {
   Future<void> verifySignUpOtp({
     required String phoneNumber,
     required String otp,
+  });
+
+  Future<UseDto> socialLogin({
+    required String provider,
+    required String token,
   });
 }

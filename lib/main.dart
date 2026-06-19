@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_place_car/core/global/localization/locale/app_localizations_setup.dart';
 import 'package:market_place_car/core/global/theme/theme_data/app_theme.dart';
 import 'package:market_place_car/data/services/service_locator.dart';
+import 'package:market_place_car/presentation/controller/cubit/auth/auth_cubit.dart';
 import 'package:market_place_car/presentation/controller/cubit/locale/locale_state.dart';
 import 'package:market_place_car/presentation/controller/cubit/onboarding/onboarding_state.dart';
 import 'package:market_place_car/presentation/controller/cubit/theme/theme_state.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => sl<ThemeCubit>()..loadSavedTheme()),
         BlocProvider(create: (_) => sl<LocaleCubit>()..loadSavedLocale()),
         BlocProvider(create: (_) => sl<OnboardingCubit>()),
+        BlocProvider(create: (_) => sl<AuthCubit>()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, themeState) {

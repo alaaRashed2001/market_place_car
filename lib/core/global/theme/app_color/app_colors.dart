@@ -19,7 +19,9 @@ abstract class AppColors {
   final Color buttonBackgroundColor;
   final Color buttonTextColor;
   final Color dangerButtonColor;
-
+  final Color successColor;
+  final Color errorColor;
+  final Color snackBarTextColor;
   const AppColors({
     required this.primaryColor,
     required this.backgroundColor,
@@ -39,6 +41,9 @@ abstract class AppColors {
     required this.buttonBackgroundColor,
     required this.buttonTextColor,
     required this.dangerButtonColor,
+    required this.successColor,
+    required this.errorColor,
+    required this.snackBarTextColor,
   });
 }
 
@@ -63,6 +68,9 @@ class AppColorLight extends AppColors {
     buttonBackgroundColor: const Color(0xFF000000),
     buttonTextColor: const Color(0xFFFFFFFF),
     dangerButtonColor: const Color(0xFF93000F),
+    successColor: const Color(0xFF10B981),
+    errorColor: const Color(0xFFEF4444),
+    snackBarTextColor: const Color(0xFFFFFFFF),
   );
 }
 
@@ -87,5 +95,8 @@ class AppColorDark extends AppColors {
     buttonBackgroundColor: const Color(0xFFFFFFFF),
     buttonTextColor: const Color(0xFF000000),
     dangerButtonColor: const Color(0xFF93000F),
+    successColor: const Color(0xFF059669),
+    errorColor: const Color(0xFFDC2626),
+    snackBarTextColor: const Color(0xFFFFFFFF),
   );
 }

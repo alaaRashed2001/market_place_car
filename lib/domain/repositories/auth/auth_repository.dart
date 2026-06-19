@@ -1,37 +1,46 @@
 import 'package:dartz/dartz.dart';
 import 'package:market_place_car/domain/entities/auth/user_entity.dart';
-import 'package:market_place_car/domain/failure/auth_failure.dart';
+import 'package:market_place_car/domain/failure/failure.dart';
 abstract class AuthRepository {
-  Future<Either<AuthFailure, UserEntity>> login({
+  Future<Either<Failure, UserEntity>> login({
     required String phoneNumber,
     required String password,
   });
 
-  Future<Either<AuthFailure, void>> forgotPassword({
+  Future<Either<Failure, void>> forgotPassword({
     required String phoneNumber,
   });
 
-  Future<Either<AuthFailure, void>> verifyOtp({
+  Future<Either<Failure, void>> verifyOtp({
     required String phoneNumber,
     required String otp,
   });
 
-  Future<Either<AuthFailure, void>> resetPassword({
+  Future<Either<Failure, void>> resetPassword({
     required String phoneNumber,
     required String newPassword,
   });
 
-  Future<Either<AuthFailure, UserEntity>> signUp({
+  Future<Either<Failure, UserEntity>> signUp({
     required String fullName,
     required String email,
     required String phoneNumber,
     required String password,
   });
 
-  Future<Either<AuthFailure, void>> verifySignUpOtp({
+  Future<Either<Failure, void>> verifySignUpOtp({
     required String phoneNumber,
     required String otp,
   });
 
-  Future<Either<AuthFailure, void>> logout();
+  Future<Either<Failure, void>> saveToken(String token);
+  Future<Either<Failure, String?>> getToken();
+
+  Future<Either<Failure, void>> logout();
+
+  Future<Either<Failure, UserEntity>> socialLogin({
+    required String provider,
+    required String token,
+  });
 }
+
