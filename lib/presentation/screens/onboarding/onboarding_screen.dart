@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_place_car/core/constants/app_images.dart';
-import 'package:market_place_car/core/extension/sized_box_extension.dart';
+import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/global/localization/locale/app_localizations_setup.dart';
 import 'package:market_place_car/presentation/components/shared_component/app_primary_button.dart';
 import 'package:market_place_car/presentation/components/shared_component/app_text_button.dart';
@@ -112,7 +112,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             width: double.infinity,
                             height: 189,
                           ),
-                          32.height,
+                          context.addVerticalSpace(32),
                           Text(
                             slide.title,
                             textAlign: TextAlign.center,
@@ -120,7 +120,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             maxLines: 1,
                           ),
 
-                          24.height,
+                          context.addVerticalSpace(24),
                           Text(
                             slide.description,
                             textAlign: TextAlign.center,

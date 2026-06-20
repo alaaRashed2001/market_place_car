@@ -1,12 +1,20 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:market_place_car/core/extension/sized_box_extension.dart';
+import 'package:market_place_car/core/constants/app_images.dart';
+import 'package:market_place_car/core/extension/app_sizes.dart';
+import 'package:market_place_car/core/extension/responsive_layout_extention.dart';
+import 'package:market_place_car/core/extension/text_style_extension.dart';
 import 'package:market_place_car/core/global/localization/locale/app_localizations_setup.dart';
+import 'package:market_place_car/presentation/components/auth/otp_input_field.dart';
 import 'package:market_place_car/presentation/components/shared_component/app_primary_button.dart';
+import 'package:market_place_car/presentation/components/shared_component/app_text_button.dart';
+import 'package:market_place_car/presentation/components/shared_component/back_icon_button.dart';
 import 'package:market_place_car/presentation/controller/cubit/auth/auth_cubit.dart';
 import 'package:market_place_car/presentation/controller/cubit/auth/auth_state.dart';
+import 'package:market_place_car/presentation/helper/app_asset_helper.dart';
 import 'package:market_place_car/presentation/helper/navigator_helper.dart';
+import 'package:market_place_car/presentation/helper/snack_bar_helper.dart';
 import 'package:market_place_car/presentation/screens/auth/create_new_password_screen.dart';
 
 class VerifyOtpScreen extends StatefulWidget {
@@ -18,7 +26,12 @@ class VerifyOtpScreen extends StatefulWidget {
 }
 
 class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
-  final TextEditingController _otpController = TextEditingController();
+  final List<TextEditingController> _otpControllers = List.generate(
+    4,
+    (_) => TextEditingController(),
+  );
+
+  final List<FocusNode> _focusNodes = List.generate(4, (_) => FocusNode());
   int _seconds = 59;
   Timer? _timer;
 
@@ -42,25 +55,30 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
     });
   }
 
+  String get _otpCode => _otpControllers.map((c) => c.text).join();
   @override
   void dispose() {
     _timer?.cancel();
-    _otpController.dispose();
+
+    for (var c in _otpControllers) {
+      c.dispose();
+    }
+    for (var f in _focusNodes) {
+      f.dispose();
+    }
     super.dispose();
   }
 
   void _verifyOtp() {
-    if (_otpController.text.length == 4) {
-      context.read<AuthCubit>().verifyOTP(
-            phoneNumber: widget.phone,
-            otp: _otpController.text,
-          );
+    final code = _otpCode;
+
+    if (code.length == 4) {
+      context.read<AuthCubit>().verifyOTP(phoneNumber: widget.phone, otp: code);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please enter a 4-digit code'),
-          backgroundColor: Colors.redAccent,
-        ),
+      SnackBarHelper.showSnackBar(
+        context,
+        message: 'Please enter a 4-digit code',
+        error: true,
       );
     }
   }
@@ -68,137 +86,87 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l.verification),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ),
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is OTPSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('OTP Verified successfully!'),
-                backgroundColor: Colors.green,
-              ),
+            SnackBarHelper.showSnackBar(
+              context,
+              message: 'OTP Verified successfully!',
+              error: false,
             );
+
             NavigatorHelper.jump(
               context,
               screen: CreateNewPasswordScreen(phone: widget.phone),
             );
           } else if (state is AuthError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.message),
-                backgroundColor: Colors.redAccent,
-              ),
+            SnackBarHelper.showSnackBar(
+              context,
+              message: state.message,
+              error: true,
             );
           }
         },
         builder: (context, state) {
           final isLoading = state is AuthLoading;
 
-          return SafeArea(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 20),
-                  Icon(
-                    Icons.mark_email_read_outlined,
-                    size: 80,
-                    color: isDark ? Colors.white70 : Colors.black54,
-                  ),
-                  24.height,
-                  Text(
-                    l.verifyPhoneNumber,
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: isDark ? Colors.white : Colors.black,
-                    ),
-                  ),
-                  12.height,
-                  Text(
-                    l.otpSentTo(widget.phone),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: isDark ? Colors.white60 : Colors.black54,
-                      height: 1.5,
-                    ),
-                  ),
-                  36.height,
+          return SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Align(alignment: Alignment.topLeft, child: BackIconButton()),
+                AppAssetHelper.svgImage(
+                  AppImages.verifyPhone,
+                  width: context.wp(22),
+                  height: context.hp(11),
+                ).padTop(40),
 
-                  // OTP Field (can use a simple Row of Inputs or custom OTP field if available)
-                  // Let's implement a neat OTP input style using standard Row of TextFields or custom UI
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 240,
-                        child: TextField(
-                          controller: _otpController,
-                          keyboardType: TextInputType.number,
-                          maxLength: 4,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 24,
-                          ),
-                          decoration: InputDecoration(
-                            counterText: '',
-                            contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                            hintText: '0000',
-                            hintStyle: TextStyle(
-                              color: isDark ? Colors.white12 : Colors.grey.shade300,
-                              letterSpacing: 24,
-                            ),
-                          ),
+                Text(
+                  l.verifyPhoneNumber,
+                  style: context.titleBold18,
+                  textAlign: TextAlign.center,
+                ).padTop(16),
+
+                context.addVerticalSpace(18),
+
+                Text(
+                  l.otpSentTo(widget.phone),
+                  textAlign: TextAlign.center,
+                  style: context.bodyRegular14,
+                ).padSymmetricHorizon(34),
+                OtpInputField(
+                  controllers: _otpControllers,
+                  focusNodes: _focusNodes,
+                ).padTop(32),
+
+                AppPrimaryButton(
+                  text: l.verify,
+                  isLoading: isLoading,
+                  onPressed: _verifyOtp,
+                ).padTop(32),
+
+                context.addVerticalSpace(32),
+
+                _seconds > 0
+                    ? Text(
+                        l.resendCodeIn(_seconds),
+                        style: context.inputRegular16?.copyWith(
+                          fontWeight: FontWeight.w400,
+                          height: 1.0,
                         ),
+                      )
+                    : AppTextButton(
+                        onPressed: () {
+                          _startTimer();
+                          context.read<AuthCubit>().forgotPassword(
+                            phoneNumber: widget.phone,
+                          );
+                        },
+                        text: l.resendCode,
                       ),
-                    ],
-                  ),
-                  36.height,
-
-                  // Timer or Resend Code
-                  _seconds > 0
-                      ? Text(
-                          l.resendCodeIn(_seconds),
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: isDark ? Colors.white38 : Colors.grey,
-                          ),
-                        )
-                      : TextButton(
-                          onPressed: () {
-                            _startTimer();
-                            context.read<AuthCubit>().forgotPassword(phoneNumber: widget.phone);
-                          },
-                          child: Text(
-                            l.resendCode,
-                            style: const TextStyle(
-                              color: Color(0xffff8a3d),
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                  48.height,
-
-                  AppPrimaryButton(
-                    text: l.verify,
-                    isLoading: isLoading,
-                    onPressed: _verifyOtp,
-                  ),
-                ],
-              ),
+              ],
             ),
           );
         },

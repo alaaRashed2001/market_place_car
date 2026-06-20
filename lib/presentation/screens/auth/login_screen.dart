@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_field/countries.dart';
 import 'package:market_place_car/core/constants/app_images.dart';
-import 'package:market_place_car/core/extension/sized_box_extension.dart';
+import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/extension/text_style_extension.dart';
 import 'package:market_place_car/core/global/localization/locale/app_localizations_setup.dart';
 import 'package:market_place_car/domain/repositories/auth/auth_repository.dart';
@@ -12,6 +12,7 @@ import 'package:market_place_car/presentation/components/auth/auth_text_field.da
 import 'package:market_place_car/presentation/components/shared_component/app_primary_button.dart';
 import 'package:market_place_car/presentation/components/shared_component/app_text_button.dart';
 import 'package:market_place_car/presentation/components/auth/social_login_row.dart';
+import 'package:market_place_car/presentation/components/shared_component/language_selector_widget.dart';
 import 'package:market_place_car/presentation/controller/cubit/auth/auth_cubit.dart';
 import 'package:market_place_car/presentation/controller/cubit/auth/auth_state.dart';
 import 'package:market_place_car/presentation/helper/app_asset_helper.dart';
@@ -90,23 +91,22 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                20.height,
 
                 AppAssetHelper.svgImage(
                   AppImages.yellowCar,
                   width: 172,
                   height: 50,
                 ),
-                32.height,
+                context.addVerticalSpace(32),
 
                 Text(l.welcomeBack, style: context.titleBold18),
-                8.height,
+                context.addVerticalSpace(8),
                 Text(
                   l.signInSubtitle,
                   textAlign: TextAlign.center,
                   style: context.bodyRegular14,
                 ),
-                40.height,
+                context.addVerticalSpace(40),
 
                 Form(
                   key: _loginFormKey,
@@ -118,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           _selectedCountry = country;
                         },
                       ),
-                      16.height,
+                      context.addVerticalSpace(16),
 
                       AuthTextField(
                         controller: _passwordController,
@@ -130,25 +130,26 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                 ),
-                16.height,
-
+                context.addVerticalSpace(16),
+                LanguageSelectorWidget(),
                 Align(
                   alignment: AlignmentDirectional.centerEnd,
                   child: AppTextButton(
                     text: l.forgotPassword,
+                    type: AppTextButtonStyleType.smallGray,
                     onPressed: () => NavigatorHelper.jump(
                       context,
                       screen: const ForgotPasswordScreen(),
                     ),
                   ),
                 ),
-                24.height,
+                context.addVerticalSpace(24),
                 AppPrimaryButton(
                   text: l.signIn,
                   isLoading: isLoading,
                   onPressed: _submitLogin,
                 ),
-                32.height,
+                context.addVerticalSpace(32),
 
                 Row(
                   children: [
@@ -163,9 +164,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     Expanded(child: Divider()),
                   ],
                 ),
-                24.height,
+                context.addVerticalSpace(24),
                 const SocialLoginRow(),
-                32.height,
+                context.addVerticalSpace(32),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_place_car/core/global/localization/helper/locale_entity.dart';
+import 'package:market_place_car/presentation/components/shared_component/app_bottom_sheet.dart';
 import 'package:market_place_car/presentation/controller/cubit/locale/locale_state.dart';
 
 class LanguageSelectorWidget extends StatelessWidget {
@@ -10,7 +11,9 @@ class LanguageSelectorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LocaleCubit, LocaleState>(
       builder: (context, state) {
-        final current = state is LocaleLoaded ? state.locale : LocaleEntity.english;
+        final current = state is LocaleLoaded
+            ? state.locale
+            : LocaleEntity.english;
 
         return ListTile(
           leading: const Icon(Icons.language),
@@ -26,15 +29,16 @@ class LanguageSelectorWidget extends StatelessWidget {
   }
 
   void _showLanguageSheet(BuildContext context, LocaleEntity current) {
-    showModalBottomSheet(
+    AppBottomSheet.show(
       context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (_) => BlocProvider.value(
-        value: context.read<LocaleCubit>(),
-        child: _LanguageSheetContent(current: current),
-      ),
+      useSafeArea: true,
+      isScrollable: false,
+      builder: (sheetContext, _) {
+        return BlocProvider.value(
+          value: context.read<LocaleCubit>(),
+          child: _LanguageSheetContent(current: current),
+        );
+      },
     );
   }
 }
@@ -50,17 +54,10 @@ class _LanguageSheetContent extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            width: 40,
-            height: 4,
-            decoration: BoxDecoration(
-              color: Colors.grey.shade300,
-              borderRadius: BorderRadius.circular(2),
-            ),
-          ),
-          const SizedBox(height: 20),
+
           ...LocaleEntity.supportedLocales.map(
-                (locale) => _LocaleTile(locale: locale, isSelected: locale == current),
+            (locale) =>
+                _LocaleTile(locale: locale, isSelected: locale == current),
           ),
           const SizedBox(height: 8),
         ],
@@ -78,7 +75,9 @@ class _LocaleTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(locale.label),
-      trailing: isSelected ? const Icon(Icons.check_circle, color: Colors.black) : null,
+      trailing: isSelected
+          ? const Icon(Icons.check_circle, color: Colors.black)
+          : null,
       onTap: () {
         context.read<LocaleCubit>().changeLocale(locale);
         Navigator.pop(context);

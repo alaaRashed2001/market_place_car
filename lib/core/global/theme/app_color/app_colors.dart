@@ -12,7 +12,11 @@ abstract class AppColors {
   final Color bottomNavInactiveColor;
   final Color inputFillColor;
   final Color inputBorderColor;
+  final Color inputErrorBorderColor;
   final Color inputFocusedBorderColor;
+  final Color bottomSheetBackgroundColor;
+  final Color bottomSheetHandleColor;
+  final Color bottomSheetShadowColor;
   final Color activeDotColor;
   final Color inactiveDotColor;
   final Color textPrimaryColor;
@@ -35,6 +39,13 @@ abstract class AppColors {
     required this.inputFillColor,
     required this.inputBorderColor,
     required this.inputFocusedBorderColor,
+    required this.inputErrorBorderColor,
+    required this.bottomSheetBackgroundColor,
+    required this.bottomSheetHandleColor,
+    required this.bottomSheetShadowColor,
+
+
+
     required this.activeDotColor,
     required this.inactiveDotColor,
     required this.textPrimaryColor,
@@ -53,15 +64,19 @@ class AppColorLight extends AppColors {
     primaryColor: const Color(0xFF0F0F1A),
     backgroundColor: const Color(0xFFF8F9FA),
     cardColor: const Color(0xFFFFFFFF),
-    appBarColor: const Color(0xFFFFFFFF),
+    appBarColor: const Color(0xFFF8F9FA),
     appBarIconColor: const Color(0xFF0F0F1A),
     appBarTitleColor: const Color(0xFF0F0F1A),
     bottomNavBackgroundColor: const Color(0xFFFFFFFF),
     bottomNavActiveColor: const Color(0xFF000000),
     bottomNavInactiveColor: const Color(0xFF6B7280),
     inputFillColor: const Color(0xFFF9FAFB),
-    inputBorderColor: const Color(0xFFE5E7EB),
-    inputFocusedBorderColor: const Color(0xFFE94560),
+    inputBorderColor: const Color(0xFFFFFFFF),
+    inputFocusedBorderColor: const Color(0xFF45BB6F),
+    inputErrorBorderColor: const Color(0xFFEF4444),
+    bottomSheetBackgroundColor: const Color(0xFFFFFFFF),
+    bottomSheetHandleColor: const Color(0xFF9CA3AF),
+    bottomSheetShadowColor: const Color(0x14000000),
     activeDotColor: const Color(0xFF000000),
     inactiveDotColor: const Color(0xFFB2B2B2),
     textPrimaryColor: const Color(0xFF000000),
@@ -87,8 +102,12 @@ class AppColorDark extends AppColors {
     bottomNavActiveColor: const Color(0xFFFFFFFF),
     bottomNavInactiveColor: const Color(0xFF6B7280),
     inputFillColor: const Color(0xFF1A1A2E),
-    inputBorderColor: const Color(0xFF2D2D44),
-    inputFocusedBorderColor: const Color(0xFFE94560),
+    inputBorderColor: const Color(0xFF1A1A2E),
+    inputFocusedBorderColor: const Color(0xFF45BB6F),
+    inputErrorBorderColor: const Color(0xFFEF4444),
+    bottomSheetBackgroundColor: const Color(0xFF121214),
+    bottomSheetHandleColor: const Color(0xFF6B7280),
+    bottomSheetShadowColor: const Color(0x33000000),
     activeDotColor: const Color(0xFFFFFFFF),
     inactiveDotColor: const Color(0xFF4B5563),
     textPrimaryColor: const Color(0xFFFFFFFF),

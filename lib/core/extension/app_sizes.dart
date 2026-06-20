@@ -6,25 +6,25 @@ extension AppSizes on BuildContext {
   double get availableHeight {
     final appBarHeight = kToolbarHeight;
     final statusBarHeight = MediaQuery.of(this).padding.top;
-    return MediaQuery.of(this).size.height - appBarHeight - statusBarHeight;
+    return getHeight - appBarHeight - statusBarHeight;
   }
 
-  bool get isSmallScreen => MediaQuery.sizeOf(this).height < 690;
+  bool get isSmallScreen => getHeight < 690;
 
   SizedBox addHorizontalSpace(double value) {
-    return SizedBox(width: MediaQuery.sizeOf(this).width * (value / 360));
+    return SizedBox(width: getWidth * (value / 360));
   }
 
   SizedBox addVerticalSpace(double value) {
-    return SizedBox(height: MediaQuery.sizeOf(this).height * (value / 800));
+    return SizedBox(height: getHeight * (value / 800));
   }
 
   double width(double value) {
-    return MediaQuery.sizeOf(this).width * (value / 360);
+    return getWidth * (value / 360);
   }
 
   double height(double value) {
-    return MediaQuery.sizeOf(this).height * (value / 800);
+    return getHeight * (value / 800);
   }
 
   EdgeInsets spaceAroundAll(double value) {
@@ -32,15 +32,11 @@ extension AppSizes on BuildContext {
   }
 
   EdgeInsets spaceHorizontal(double value) {
-    return EdgeInsets.symmetric(
-      horizontal: MediaQuery.sizeOf(this).width * (value / 360),
-    );
+    return EdgeInsets.symmetric(horizontal: getWidth * (value / 360));
   }
 
   EdgeInsets spaceVertical(double value) {
-    return EdgeInsets.symmetric(
-      vertical: MediaQuery.sizeOf(this).height * (value / 800),
-    );
+    return EdgeInsets.symmetric(vertical: getHeight * (value / 800));
   }
 
   EdgeInsets spaceSymmetric({
@@ -48,33 +44,25 @@ extension AppSizes on BuildContext {
     required double horizontal,
   }) {
     return EdgeInsets.symmetric(
-      horizontal: MediaQuery.sizeOf(this).width * (horizontal / 360),
-      vertical: MediaQuery.sizeOf(this).height * (vertical / 800),
+      horizontal: getWidth * (horizontal / 360),
+      vertical: getHeight * (vertical / 800),
     );
   }
 
   EdgeInsetsDirectional spaceTop(double value) {
-    return EdgeInsetsDirectional.only(
-      top: MediaQuery.sizeOf(this).height * (value / 800),
-    );
+    return EdgeInsetsDirectional.only(top: getHeight * (value / 800));
   }
 
   EdgeInsetsDirectional spaceBottom(double value) {
-    return EdgeInsetsDirectional.only(
-      bottom: MediaQuery.sizeOf(this).height * (value / 800),
-    );
+    return EdgeInsetsDirectional.only(bottom: getHeight * (value / 800));
   }
 
   EdgeInsetsDirectional spaceStart(double value) {
-    return EdgeInsetsDirectional.only(
-      start: MediaQuery.sizeOf(this).width * (value / 360),
-    );
+    return EdgeInsetsDirectional.only(start: getWidth * (value / 360));
   }
 
   EdgeInsetsDirectional spaceEnd(double value) {
-    return EdgeInsetsDirectional.only(
-      end: MediaQuery.sizeOf(this).width * (value / 360),
-    );
+    return EdgeInsetsDirectional.only(end: getWidth * (value / 360));
   }
 
   BorderRadius circularRadius(double value) {
@@ -108,7 +96,7 @@ extension LayoutExtensions on Widget {
   );
   Widget center() => Center(child: this);
   Widget contains() => Container(color: Colors.red, child: this);
-  Widget padSymmetricHoriz(double value) => Padding(
+  Widget padSymmetricHorizon(double value) => Padding(
     padding: EdgeInsetsDirectional.symmetric(horizontal: value),
     child: this,
   );

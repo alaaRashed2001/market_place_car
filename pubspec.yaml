@@ -41,3 +41,9 @@ flutter:
     - assets/images/
     - assets/icons/
 
+  fonts:
+    - family: AvenirArabic
+      fonts:
+        - asset: assets/fonts/avenir-arabic-black.otf
+
+

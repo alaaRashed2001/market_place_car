@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/countries.dart';
+import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/extension/opacity_of_color.dart';
-import 'package:market_place_car/core/extension/sized_box_extension.dart';
 import 'package:market_place_car/presentation/components/auth/auth_text_field.dart';
 
 class CountryPickerBottomSheet extends StatefulWidget {
@@ -31,76 +31,55 @@ class _CountryPickerBottomSheetState extends State<CountryPickerBottomSheet> {
     final String localeCode = Localizations.localeOf(context).languageCode;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      padding: context.spaceHorizontal(12),
       child: Column(
         spacing: 10,
         children: [
-          Container(
-            width: 40,
-            height: 5,
-            decoration: BoxDecoration(
-              color: Colors.grey.shade300,
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: AuthTextField(
-              controller: _searchController,
-              hintText: "Search country...",
-              isSearch: true,
-              onChanged: (String value) {
-                setState(() {
-                  _filteredCountries = countries
-                      .where(
-                        (country) =>
-                            country.name.toLowerCase().contains(
-                              value.toLowerCase(),
-                            ) ||
-                            country
-                                .localizedName(localeCode)
-                                .toLowerCase()
-                                .contains(value.toLowerCase()),
-                      )
-                      .toList();
-                });
-              },
-            ),
+          AuthTextField(
+            controller: _searchController,
+            hintText: "Search country...",
+            isSearch: true,
+            onChanged: (String value) {
+              setState(() {
+                _filteredCountries = countries
+                    .where(
+                      (country) =>
+                          country.name.toLowerCase().contains(
+                            value.toLowerCase(),
+                          ) ||
+                          country
+                              .localizedName(localeCode)
+                              .toLowerCase()
+                              .contains(value.toLowerCase()),
+                    )
+                    .toList();
+              });
+            },
           ),
 
           Expanded(
             child: ListView.separated(
               controller: widget.scrollController,
               physics: const BouncingScrollPhysics(),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16.0,
-                vertical: 12.0,
-              ),
+
               itemCount: _countriesList.length,
-              separatorBuilder: (context, index) => 10.height,
+              separatorBuilder: (context, index) =>
+                  context.addVerticalSpace(10),
               itemBuilder: (context, index) {
                 final Country country = _countriesList[index];
 
                 return Container(
                   decoration: BoxDecoration(
                     color: Theme.of(context).cardColor,
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.changeOpacity(0.04),
-                        blurRadius: 10,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
+                    borderRadius: context.circularRadius(16),
                   ),
                   child: ListTile(
-                    onTap: () {
-                      Navigator.pop(context, country);
-                    },
-                    contentPadding: const EdgeInsets.symmetric(
+                    onTap: () => Navigator.pop(context, country),
+                    contentPadding: context.spaceSymmetric(
                       horizontal: 16,
                       vertical: 8,
                     ),
+
                     leading: Container(
                       width: 44,
                       height: 44,

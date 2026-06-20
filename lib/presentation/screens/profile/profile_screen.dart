@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:market_place_car/core/extension/sized_box_extension.dart';
+import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/global/localization/locale/app_localizations_setup.dart';
 import 'package:market_place_car/data/services/service_locator.dart';
 import 'package:market_place_car/domain/repositories/auth/auth_repository.dart';
@@ -26,7 +26,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final l = context.l10n;
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final primaryColor = Theme.of(context).primaryColor;
     final cardColor = Theme.of(context).cardColor;
 
     return Scaffold(
@@ -50,9 +49,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 50),
-                    // Profile Image placeholder with initial circle avatar
-                    Container(
+                    context.addVerticalSpace(12),
+                   Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.white, width: 4),
@@ -77,7 +75,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                       ),
                     ),
-                    12.height,
+                    context.addVerticalSpace(12),
                     Text(
                       _userName,
                       style: const TextStyle(
@@ -86,7 +84,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         color: Colors.white,
                       ),
                     ),
-                    4.height,
+                    context.addVerticalSpace(12),
                     Text(
                       _userEmail,
                       style: TextStyle(
@@ -116,7 +114,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     isDark: isDark,
                     cardColor: cardColor,
                   ),
-                  24.height,
+                  context.addVerticalSpace(12),
 
                   // Preferences Section
                   _buildSectionTitle("PREFERENCES / الإعدادات", isDark),
@@ -151,7 +149,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                   ),
-                  24.height,
+                  context.addVerticalSpace(12),
 
                   // App settings list
                   _buildSectionTitle("SUPPORT / الدعم والخصوصية", isDark),
@@ -188,7 +186,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                   ),
-                  36.height,
+                  context.addVerticalSpace(12),
 
                   // Logout button
                   ElevatedButton(

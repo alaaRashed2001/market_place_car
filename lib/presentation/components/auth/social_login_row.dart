@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/extension/opacity_of_color.dart';
-import 'package:market_place_car/core/extension/sized_box_extension.dart';
 import 'package:market_place_car/presentation/components/shared_component/app_bottom_sheet.dart';
 import 'package:market_place_car/presentation/controller/cubit/auth/auth_cubit.dart';
 
@@ -11,13 +11,16 @@ class SocialLoginRow extends StatelessWidget {
   void _handleSocialLogin(BuildContext context, String provider) {
     AppBottomSheet.show(
       context: context,
-
-      builder: (sheetContext) {
+      isScrollable: false,
+      builder: (sheetContext, _) {
         return _MockOAuthBottomSheet(
           provider: provider,
           onSuccess: (token) {
             Navigator.pop(sheetContext);
-            context.read<AuthCubit>().socialLogin(provider: provider, token: token);
+            context.read<AuthCubit>().socialLogin(
+              provider: provider,
+              token: token,
+            );
           },
         );
       },
@@ -91,16 +94,12 @@ class _SocialButton extends StatelessWidget {
               ),
             ],
             border: Border.all(
-              color: isDark ? Colors.white.changeOpacity(0.05) : Colors.grey.shade200,
+              color: isDark
+                  ? Colors.white.changeOpacity(0.05)
+                  : Colors.grey.shade200,
             ),
           ),
-          child: Center(
-            child: Icon(
-              icon,
-              size: 28,
-              color: color,
-            ),
-          ),
+          child: Center(child: Icon(icon, size: 28, color: color)),
         ),
       ),
     );
@@ -163,40 +162,20 @@ class _MockOAuthBottomSheetState extends State<_MockOAuthBottomSheet> {
     setState(() => _authenticating = true);
     await Future.delayed(const Duration(milliseconds: 1500));
     if (mounted) {
-      widget.onSuccess('mock_oauth_token_${widget.provider}_${DateTime.now().millisecondsSinceEpoch}');
+      widget.onSuccess(
+        'mock_oauth_token_${widget.provider}_${DateTime.now().millisecondsSinceEpoch}',
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    return Padding(
+      padding: context.spaceSymmetric(horizontal: 24, vertical: 32),
 
-    return Container(
-      decoration: BoxDecoration(
-
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.changeOpacity(0.3),
-            blurRadius: 40,
-            spreadRadius: 10,
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Drag handle
-          Container(
-            width: 40,
-            height: 4,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(2),
-            ),
-          ),
-        32.height,
-
-          // Provider Logo & Title
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 300),
             child: _authenticating
@@ -215,22 +194,16 @@ class _MockOAuthBottomSheetState extends State<_MockOAuthBottomSheet> {
                       color: _providerColor.changeOpacity(0.1),
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(
-                      _providerIcon,
-                      size: 40,
-                      color: _providerColor,
-                    ),
+                    child: Icon(_providerIcon, size: 40, color: _providerColor),
                   ),
           ),
           const SizedBox(height: 24),
 
           Text(
-            _authenticating ? "Connecting Account..." : "Sign in with $_providerName",
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-
-            ),
+            _authenticating
+                ? "Connecting Account..."
+                : "Sign in with $_providerName",
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 12),
 
@@ -239,11 +212,7 @@ class _MockOAuthBottomSheetState extends State<_MockOAuthBottomSheet> {
                 ? "Please wait while we secure your connection."
                 : "CarAds wants to access your public profile and email address to create your secure account.",
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 14,
-
-              height: 1.5,
-            ),
+            style: TextStyle(fontSize: 14, height: 1.5),
           ),
           const SizedBox(height: 36),
 
@@ -256,7 +225,7 @@ class _MockOAuthBottomSheetState extends State<_MockOAuthBottomSheet> {
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-               ),
+                ),
                 child: Row(
                   children: [
                     CircleAvatar(
@@ -281,25 +250,17 @@ class _MockOAuthBottomSheetState extends State<_MockOAuthBottomSheet> {
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-
                             ),
                           ),
                           const SizedBox(height: 4),
                           Text(
                             "alaa.rashed@gmail.com",
-                            style: TextStyle(
-                              fontSize: 13,
-
-                            ),
+                            style: TextStyle(fontSize: 13),
                           ),
                         ],
                       ),
                     ),
-                    Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      size: 16,
-
-                    ),
+                    Icon(Icons.arrow_forward_ios_rounded, size: 16),
                   ],
                 ),
               ),
@@ -314,11 +275,7 @@ class _MockOAuthBottomSheetState extends State<_MockOAuthBottomSheet> {
               ),
               child: Text(
                 "Cancel",
-                style: TextStyle(
-
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ),
           ] else ...[

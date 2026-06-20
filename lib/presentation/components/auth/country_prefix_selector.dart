@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/countries.dart';
-import 'package:market_place_car/core/extension/sized_box_extension.dart';
+import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/extension/text_style_extension.dart';
 
 class CountryPrefixSelector extends StatelessWidget {
@@ -27,7 +27,7 @@ class CountryPrefixSelector extends StatelessWidget {
               selectedCountry.flag,
               style: const TextStyle(fontSize: 20),
             ),
-            4.width,
+            context.addHorizontalSpace(4),
             Text(
               "+${selectedCountry.displayCC}",
               style: context.bodyRegular14,

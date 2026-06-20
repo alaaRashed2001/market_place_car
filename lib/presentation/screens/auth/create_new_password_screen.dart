@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:market_place_car/core/extension/sized_box_extension.dart';
+import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/global/localization/locale/app_localizations_setup.dart';
 import 'package:market_place_car/presentation/components/auth/auth_text_field.dart';
 import 'package:market_place_car/presentation/components/shared_component/app_primary_button.dart';
@@ -90,7 +90,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                     size: 80,
                     color: isDark ? Colors.white70 : Colors.black54,
                   ),
-                  24.height,
+                  context.addVerticalSpace(24),
                   Text(
                     l.createNewPassword,
                     style: TextStyle(
@@ -99,7 +99,8 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                       color: isDark ? Colors.white : Colors.black,
                     ),
                   ),
-                  12.height,
+                  context.addVerticalSpace(12),
+
                   Text(
                     l.createNewPasswordSubtitle,
                     textAlign: TextAlign.center,
@@ -109,7 +110,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                       height: 1.5,
                     ),
                   ),
-                  36.height,
+                  context.addVerticalSpace(36),
 
                   Form(
                     key: _formKey,
@@ -131,7 +132,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                             return null;
                           },
                         ),
-                        16.height,
+                        context.addVerticalSpace(16),
 
                         // Confirm Password
                         AuthTextField(
@@ -152,7 +153,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                       ],
                     ),
                   ),
-                  40.height,
+                  context.addVerticalSpace(40),
 
                   AppPrimaryButton(
                     text: l.confirm,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_field/countries.dart';
 import 'package:market_place_car/core/constants/app_images.dart';
-import 'package:market_place_car/core/extension/sized_box_extension.dart';
+import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/extension/text_style_extension.dart';
 import 'package:market_place_car/core/global/localization/locale/app_localizations_setup.dart';
 import 'package:market_place_car/presentation/components/auth/auth_phone_text_field.dart';
@@ -99,15 +99,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   width: 140,
                   height: 40,
                 ),
-                20.height,
+                context.addVerticalSpace(12),
                 Text(l.joinCarAds, style: context.titleBold18),
-                6.height,
+                context.addVerticalSpace(12),
                 Text(
                   l.signUpSubtitle,
                   textAlign: TextAlign.center,
                   style: context.titleBold18,
                 ),
-                28.height,
+                context.addVerticalSpace(12),
 
                 Form(
                   key: _signUpFormKey,
@@ -121,7 +121,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         validator: (value) =>
                             AuthValidators.validateRequired(context, value),
                       ),
-                      16.height,
+                      context.addVerticalSpace(12),
 
                       // Email
                       AuthTextField(
@@ -131,7 +131,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         validator: (value) =>
                             AuthValidators.validateEmail(context, value),
                       ),
-                      16.height,
+                      context.addVerticalSpace(12),
 
                       // Phone Number
                       AuthPhoneTextField(
@@ -140,7 +140,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           _selectedCountry = country;
                         },
                       ),
-                      16.height,
+                      context.addVerticalSpace(12),
 
                       // Password
                       AuthTextField(
@@ -154,7 +154,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               value,
                             ),
                       ),
-                      16.height,
+                      context.addVerticalSpace(16),
 
                       // Confirm Password
                       AuthTextField(
@@ -172,7 +172,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ],
                   ),
                 ),
-                32.height,
+                context.addVerticalSpace(12),
 
                 // Register Button
                 AppPrimaryButton(
@@ -180,7 +180,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   isLoading: isLoading,
                   onPressed: _submitSignUp,
                 ),
-                24.height,
+                context.addVerticalSpace(12),
 
                 // Already have account
                 Row(

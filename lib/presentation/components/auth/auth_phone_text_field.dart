@@ -25,20 +25,38 @@ class _AuthPhoneTextFieldState extends State<AuthPhoneTextField> {
     (country) => country.code == "AE",
   );
 
+  bool _isPickerOpen = false;
   Future<void> _onCountryPickerTap() async {
-    final result = await AppBottomSheet.showScrollable<Country>(
+    if (_isPickerOpen) return;
+
+    _isPickerOpen = true;
+
+    final result = await AppBottomSheet.show<Country>(
       context: context,
-      scrollableBuilder: (context, scrollController) =>
-          CountryPickerBottomSheet(scrollController: scrollController),
+      isScrollable: true,
+      initialChildSize: 0.75,
+      minChildSize: 0.4,
+      maxChildSize: 0.95,
+      builder: (context, scrollController) {
+        return CountryPickerBottomSheet(
+          scrollController: scrollController!,
+        );
+      },
     );
 
-    if (result != null) {
+    _isPickerOpen = false;
+
+    if (!mounted) return;
+
+    if (result != null && result != _selectedCountry) {
       setState(() {
         _selectedCountry = result;
       });
+
       widget.onCountryChanged(result);
     }
   }
+
 
   @override
   Widget build(BuildContext context) {

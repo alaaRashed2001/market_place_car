@@ -13,6 +13,7 @@ class AppImages {
   static const String onboarding2 = '${baseImageUrl}onboarding2.jpg';
   static const String onboarding3 = '${baseImageUrl}onboarding3.jpg';
   static const String yellowCar = '${baseImageUrl}yellow_car.svg';
+  static const String verifyPhone = '${baseImageUrl}verify_phone.svg';
 
   /// Icons
   static const String home = '${baseIconUrl}home.svg';
@@ -26,4 +27,5 @@ class AppImages {
   static const String historyActive = '${baseIconUrl}history_active.svg';
   static const String profile = '${baseIconUrl}profile.svg';
   static const String profileActive = '${baseIconUrl}profile_active.svg';
+  static const String backIcon = '${baseIconUrl}back_icon.svg';
 }

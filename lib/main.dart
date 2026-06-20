@@ -45,6 +45,17 @@ class MyApp extends StatelessWidget {
                 localizationsDelegates: appLocalizationDelegates,
                 supportedLocales: appSupportedLocales,
                 home: const SplashScreen(),
+                builder: (context, child) {
+                 final isAndroid = Theme.of(context).platform == TargetPlatform.android;
+
+                  return SafeArea(
+                    top: true,
+                    left: true,
+                    right: true,
+                    bottom: isAndroid,
+                    child: child ?? const SizedBox(),
+                  );
+                },
               );
             },
           );
