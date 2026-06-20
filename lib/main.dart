@@ -7,6 +7,7 @@ import 'package:market_place_car/presentation/controller/cubit/auth/auth_cubit.d
 import 'package:market_place_car/presentation/controller/cubit/locale/locale_state.dart';
 import 'package:market_place_car/presentation/controller/cubit/onboarding/onboarding_state.dart';
 import 'package:market_place_car/presentation/controller/cubit/theme/theme_state.dart';
+import 'package:market_place_car/presentation/screens/main_screen.dart';
 import 'package:market_place_car/presentation/screens/onboarding/splash_screen.dart';
 
 Future<void> main() async {
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
                 locale: locale,
                 localizationsDelegates: appLocalizationDelegates,
                 supportedLocales: appSupportedLocales,
-                home: const SplashScreen(),
+                home: const MainScreen(),
                 builder: (context, child) {
                  final isAndroid = Theme.of(context).platform == TargetPlatform.android;
 

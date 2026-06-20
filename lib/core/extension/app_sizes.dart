@@ -48,7 +48,19 @@ extension AppSizes on BuildContext {
       vertical: getHeight * (vertical / 800),
     );
   }
-
+  EdgeInsets fromLTRB({
+    required double left,
+    required double top,
+    required double right,
+    required double bottom,
+  }) {
+    return EdgeInsets.fromLTRB(
+      width(left),
+      height(top),
+      width(right),
+      height(bottom),
+    );
+  }
   EdgeInsetsDirectional spaceTop(double value) {
     return EdgeInsetsDirectional.only(top: getHeight * (value / 800));
   }

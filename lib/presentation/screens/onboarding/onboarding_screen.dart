@@ -5,6 +5,7 @@ import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/global/localization/locale/app_localizations_setup.dart';
 import 'package:market_place_car/presentation/components/shared_component/app_primary_button.dart';
 import 'package:market_place_car/presentation/components/shared_component/app_text_button.dart';
+import 'package:market_place_car/presentation/components/shared_component/page_indicator.dart';
 import 'package:market_place_car/presentation/controller/cubit/onboarding/onboarding_state.dart';
 import 'package:market_place_car/presentation/helper/navigator_helper.dart';
 import 'package:market_place_car/presentation/screens/auth/login_screen.dart';
@@ -133,27 +134,30 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   },
                 ),
               ),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(slides.length, (index) {
-                  final isSelected = currentPage == index;
-                  return AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    width: isSelected ? 35 : 9,
-                    height: 9,
-                    margin: const EdgeInsets.symmetric(horizontal: 2),
-                    decoration: BoxDecoration(
-                      color: isSelected
-                          ? Theme.of(context).colorScheme.primary
-                          : Theme.of(
-                              context,
-                            ).colorScheme.surfaceContainerHighest,
-                      borderRadius: BorderRadius.circular(23.11),
-                    ),
-                  );
-                }),
+              PageIndicator(
+                currentPage: currentPage,
+                itemCount: slides.length,
               ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: List.generate(slides.length, (index) {
+              //     final isSelected = currentPage == index;
+              //     return AnimatedContainer(
+              //       duration: const Duration(milliseconds: 300),
+              //       width: isSelected ? 35 : 9,
+              //       height: 9,
+              //       margin: const EdgeInsets.symmetric(horizontal: 2),
+              //       decoration: BoxDecoration(
+              //         color: isSelected
+              //             ? Theme.of(context).colorScheme.primary
+              //             : Theme.of(
+              //                 context,
+              //               ).colorScheme.surfaceContainerHighest,
+              //         borderRadius: BorderRadius.circular(23.11),
+              //       ),
+              //     );
+              //   }),
+              // ),
               Padding(
                 padding: const EdgeInsetsDirectional.only(
                   start: 20,

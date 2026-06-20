@@ -28,4 +28,7 @@ class AppImages {
   static const String profile = '${baseIconUrl}profile.svg';
   static const String profileActive = '${baseIconUrl}profile_active.svg';
   static const String backIcon = '${baseIconUrl}back_icon.svg';
+  static const String fuelType = '${baseIconUrl}fuel_type.svg';
+  static const String seats = '${baseIconUrl}seats.svg';
+  static const String transmission = '${baseIconUrl}transmission.svg';
 }

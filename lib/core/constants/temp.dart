@@ -1,0 +1,3 @@
+const String testImage ="https://imgs.search.brave.com/tu80peDDYz46QJ-k5hQt-xJBiKLPdXDaWtkdTw-6rH8/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4t/ZnJvbnQuZnJlZXBp/ay5jb20vaG9tZS9h/bm9uLXJ2bXAvY3Jl/YXRpdmUtc3VpdGUv/YXVkaW8tY3JlYXRp/b24vdmlzdWFscy1z/b25ncy53ZWJw";
+const String toyotaImage ="https://media.gettyimages.com/id/147461093/photo/sports-car-on-a-coastal-road.jpg?s=1024x1024&w=gi&k=20&c=wk_YfEdlmA-_3hzg5pFdMwXHjjz1q8XSFG4IwyC5aUQ=";
+const String camryImage ="https://media.gettyimages.com/id/56545963/photo/the-hybrid-version-of-the-toyota-camry-i.jpg?s=1024x1024&w=gi&k=20&c=NT7TpEZvd2A2fbOEIAXyARkkb-Td9O9HyEXbiJicfeI=";
