@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:market_place_car/core/extension/app_sizes.dart';
+import 'package:market_place_car/core/extension/text_style_extension.dart';
 
 class WelcomeHeader extends StatelessWidget {
   const WelcomeHeader({super.key});
@@ -11,8 +13,10 @@ class WelcomeHeader extends StatelessWidget {
         Expanded(
           child: Text(
             'Welcome Alaa',
-            style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w800, color: Colors.black),
-          ),
+            style: context.h1Regular28,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+          ).padEnd(8),
         ),
         Container(
           width: 48,

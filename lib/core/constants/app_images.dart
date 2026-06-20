@@ -31,4 +31,5 @@ class AppImages {
   static const String fuelType = '${baseIconUrl}fuel_type.svg';
   static const String seats = '${baseIconUrl}seats.svg';
   static const String transmission = '${baseIconUrl}transmission.svg';
+  static const String share = '${baseIconUrl}share.svg';
 }

@@ -50,7 +50,7 @@ class _CarSwiperCardState extends State<CarSwiperCard> {
     return Container(
       padding: context.fromLTRB(left: 20, top: 20, right: 20, bottom: 20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
         borderRadius: context.circularRadius(8),
         boxShadow: [context.appShadow],
       ),

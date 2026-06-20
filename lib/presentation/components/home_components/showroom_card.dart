@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:market_place_car/core/constants/app_images.dart';
+import 'package:market_place_car/core/extension/app_sizes.dart';
+import 'package:market_place_car/core/extension/text_style_extension.dart';
+import 'package:market_place_car/presentation/helper/app_asset_helper.dart';
+
 class Showroom {
-  const Showroom({required this.imageUrl, required this.name, required this.rating});
+  const Showroom({
+    required this.imageUrl,
+    required this.name,
+    required this.rating,
+  });
 
   final String imageUrl;
   final String name;
   final double rating;
 }
+
 class ShowroomCard extends StatelessWidget {
   const ShowroomCard({super.key, required this.showroom});
 
@@ -13,51 +23,62 @@ class ShowroomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: AspectRatio(
-            aspectRatio: 1.3,
-            child: Image.network(
-              showroom.imageUrl,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) => Container(
-                color: Colors.grey.shade200,
-                child: const Icon(Icons.store_mall_directory_outlined, color: Colors.black26, size: 32),
-              ),
+    return Container(
+      padding: context.fromLTRB(left: 10, top: 8, right: 10, bottom: 4),
+      decoration: BoxDecoration(
+        color: Theme.of(context).cardColor,
+        borderRadius: context.circularRadius(8),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: context.circularRadius(4),
+            child: AspectRatio(
+              aspectRatio: 147 / 70,
+              child: AppAssetHelper.cachedImage(showroom.imageUrl),
             ),
           ),
-        ),
-        const SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: Text(
-                showroom.name,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.black87),
-              ),
-            ),
-            const Icon(Icons.ios_share_rounded, size: 18, color: Colors.black54),
-          ],
-        ),
-        const SizedBox(height: 8),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          decoration: BoxDecoration(color: const Color(0xFFFBE9D0), borderRadius: BorderRadius.circular(8)),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
+          context.addVerticalSpace(6),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(showroom.rating.toString(), style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-              const SizedBox(width: 4),
-              const Icon(Icons.star_rounded, size: 14, color: Color(0xFFE7A93C)),
+              Expanded(
+                child: Text(
+                  showroom.name,
+                  overflow: TextOverflow.ellipsis,
+                  style: context.bodyRegular14,
+                ).padEnd(8),
+              ),
+              AppAssetHelper.svgImage(AppImages.share, width: 16, height: 16),
             ],
           ),
-        ),
-      ],
+          context.addVerticalSpace(6),
+          Container(
+            padding: context.spaceSymmetric(vertical: 4, horizontal: 8),
+            decoration: BoxDecoration(
+              color: const Color(0xFFFCF4EA),
+              borderRadius: context.circularRadius(8),
+            ),
+            child: Row(
+              spacing: 4,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  showroom.rating.toString(),
+                  style: context.bodyRegular14?.copyWith(fontSize: 8),
+                ),
+
+                const Icon(
+                  Icons.star_rounded,
+                  size: 14,
+                  color: Color(0xFFE7A93C),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -98,7 +98,7 @@ class AppColorDark extends AppColors {
       : super(
     primaryColor: const Color(0xFFFFFFFF),
     backgroundColor: const Color(0xFF000000),
-    cardColor: const Color(0xFF16213E),
+    cardColor: const Color(0xFF000000),
     appBarColor: const Color(0xFF0F0F1A),
     appBarIconColor: const Color(0xFFFFFFFF),
     appBarTitleColor: const Color(0xFFFFFFFF),
