@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:market_place_car/core/constants/app_images.dart';
 import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/extension/text_style_extension.dart';
+import 'package:market_place_car/core/global/theme/theme_data/app_theme.dart';
 import 'package:market_place_car/presentation/helper/app_asset_helper.dart';
 
 class Showroom {
@@ -50,7 +51,7 @@ class ShowroomCard extends StatelessWidget {
                   style: context.bodyRegular14,
                 ).padEnd(8),
               ),
-              AppAssetHelper.svgImage(AppImages.share, width: 16, height: 16),
+              AppAssetHelper.svgImage(AppImages.share,color: Theme.of(context).appColors.svgIconColor, width: 16, height: 16),
             ],
           ),
           context.addVerticalSpace(6),

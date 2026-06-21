@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:market_place_car/core/constants/app_images.dart';
+import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/extension/responsive_layout_extention.dart';
+import 'package:market_place_car/presentation/helper/app_asset_helper.dart';
 
 class AuthTextField extends StatefulWidget {
   final FocusNode? focusNode;
@@ -18,6 +21,7 @@ class AuthTextField extends StatefulWidget {
   final Function(String)? onSubmit;
   final String? Function(String?)? validator;
   final int maxLines;
+  final VoidCallback? onClear;
 
   const AuthTextField({
     super.key,
@@ -37,6 +41,7 @@ class AuthTextField extends StatefulWidget {
     this.onTapField,
     this.validator,
     this.maxLines = 1,
+    this.onClear,
   });
 
   @override
@@ -46,12 +51,73 @@ class AuthTextField extends StatefulWidget {
 class _AuthTextFieldState extends State<AuthTextField> {
   late bool showPassword = widget.obscure;
 
+  late bool _isTyping = widget.controller.text.isNotEmpty;
+  @override
+  void initState() {
+    super.initState();
+    if (widget.isSearch) {
+      widget.controller.addListener(_handleSearchTextChange);
+    }
+  }
+
+  void _handleSearchTextChange() {
+    final hasText = widget.controller.text.isNotEmpty;
+    if (hasText != _isTyping) {
+      setState(() => _isTyping = hasText);
+    }
+  }
+
+  @override
+  void dispose() {
+    if (widget.isSearch) {
+      widget.controller.removeListener(_handleSearchTextChange);
+    }
+    super.dispose();
+  }
+
+  void _clearSearch() {
+    widget.controller.clear();
+    widget.onChanged?.call('');
+    widget.onClear?.call();
+  }
+
+  void _togglePasswordVisibility() {
+    setState(() => showPassword = !showPassword);
+  }
+
+  Widget? _buildPrefixIcon() {
+    if (!widget.isSearch) return widget.prefixImage;
+    if (_isTyping) return null;
+    return const Icon(Icons.search);
+  }
+
+  Widget? _buildSuffixIcon() {
+    if (widget.isSearch) {
+      return _isTyping ? _buildClearButton() : null;
+    }
+    return widget.obscure ? _buildPasswordToggle() : null;
+  }
+
+  Widget _buildClearButton() {
+    return InkWell(
+      onTap: widget.readOnly ? null : _clearSearch,
+      child: AppAssetHelper.svgImage(AppImages.delete,
+      ).pad(12),
+    );
+  }
+
+  Widget _buildPasswordToggle() {
+    return InkWell(
+      onTap: widget.readOnly ? null : _togglePasswordVisibility,
+      child: Icon(showPassword ? Icons.visibility : Icons.visibility_off),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
       focusNode: widget.focusNode,
-
       obscureText: widget.obscure ? showPassword : false,
       readOnly: widget.readOnly,
       onTap: widget.onTapField,
@@ -68,19 +134,8 @@ class _AuthTextFieldState extends State<AuthTextField> {
           horizontal: context.wp(4.4),
         ),
         hintText: widget.hintText,
-        prefixIcon: widget.isSearch
-            ? const Icon(Icons.search)
-            : widget.prefixImage,
-        suffixIcon: widget.obscure
-            ? InkWell(
-                onTap: widget.readOnly
-                    ? null
-                    : () => setState(() => showPassword = !showPassword),
-                child: Icon(
-                  showPassword ? Icons.visibility : Icons.visibility_off,
-                ),
-              )
-            : null,
+        prefixIcon: _buildPrefixIcon(),
+        suffixIcon: _buildSuffixIcon(),
       ),
     );
   }

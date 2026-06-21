@@ -4,6 +4,8 @@ import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/global/localization/locale/app_localizations_setup.dart';
 import 'package:market_place_car/data/services/service_locator.dart';
 import 'package:market_place_car/domain/repositories/auth/auth_repository.dart';
+import 'package:market_place_car/presentation/components/shared_component/app_primary_button.dart';
+import 'package:market_place_car/presentation/components/shared_component/enums.dart';
 import 'package:market_place_car/presentation/components/shared_component/theme_switch_widget.dart';
 import 'package:market_place_car/presentation/components/shared_component/language_selector_widget.dart';
 import 'package:market_place_car/presentation/controller/cubit/auth/auth_cubit.dart';
@@ -189,40 +191,53 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   context.addVerticalSpace(12),
 
                   // Logout button
-                  ElevatedButton(
-                    onPressed: () {
-                      // Logout action
-                      sl<AuthRepository>().logout();
-                      context.read<AuthCubit>().logout();
-                      NavigatorHelper.jump(
-                        context,
-                        screen: const LoginScreen(),
-                        replace: true,
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.redAccent.shade700,
-                      foregroundColor: Colors.white,
-                      minimumSize: const Size(double.infinity, 52),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(Icons.logout_rounded, size: 20),
-                        const SizedBox(width: 8),
-                        Text(
-                          l.logout,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
+                  AppPrimaryButton(text: "Logout",   onPressed: () {
+                    // Logout action
+                    sl<AuthRepository>().logout();
+                    context.read<AuthCubit>().logout();
+                    NavigatorHelper.jump(
+                      context,
+                      screen: const LoginScreen(),
+                      replace: true,
+                    );
+                  },
+                    status: ButtonStatus.wrong,
+
                   ),
+                  // ElevatedButton(
+                  //   onPressed: () {
+                  //     // Logout action
+                  //     sl<AuthRepository>().logout();
+                  //     context.read<AuthCubit>().logout();
+                  //     NavigatorHelper.jump(
+                  //       context,
+                  //       screen: const LoginScreen(),
+                  //       replace: true,
+                  //     );
+                  //   },
+                  //   style: ElevatedButton.styleFrom(
+                  //     backgroundColor: Colors.redAccent.shade700,
+                  //     foregroundColor: Colors.white,
+                  //     minimumSize: const Size(double.infinity, 52),
+                  //     shape: RoundedRectangleBorder(
+                  //       borderRadius: BorderRadius.circular(16),
+                  //     ),
+                  //   ),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: [
+                  //       const Icon(Icons.logout_rounded, size: 20),
+                  //       const SizedBox(width: 8),
+                  //       Text(
+                  //         l.logout,
+                  //         style: const TextStyle(
+                  //           fontSize: 16,
+                  //           fontWeight: FontWeight.bold,
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                   const SizedBox(height: 40),
                 ],
               ),

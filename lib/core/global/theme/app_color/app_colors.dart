@@ -7,6 +7,7 @@ abstract class AppColors {
   final Color appBarColor;
   final Color appBarIconColor;
   final Color appBarTitleColor;
+  final Color svgIconColor;
   final Color bottomNavBackgroundColor;
   final Color bottomNavActiveColor;
   final Color bottomNavInactiveColor;
@@ -35,6 +36,7 @@ abstract class AppColors {
     required this.appBarColor,
     required this.appBarIconColor,
     required this.appBarTitleColor,
+    required this.svgIconColor,
     required this.bottomNavBackgroundColor,
     required this.bottomNavActiveColor,
     required this.bottomNavInactiveColor,
@@ -70,6 +72,7 @@ class AppColorLight extends AppColors {
     appBarColor: const Color(0xFFF8F9FA),
     appBarIconColor: const Color(0xFF0F0F1A),
     appBarTitleColor: const Color(0xFF0F0F1A),
+    svgIconColor:const Color(0xFF000000),
     bottomNavBackgroundColor: const Color(0xFFFFFFFF),
     bottomNavActiveColor: const Color(0xFF000000),
     bottomNavInactiveColor: const Color(0xFF6B7280),
@@ -102,6 +105,7 @@ class AppColorDark extends AppColors {
     appBarColor: const Color(0xFF0F0F1A),
     appBarIconColor: const Color(0xFFFFFFFF),
     appBarTitleColor: const Color(0xFFFFFFFF),
+    svgIconColor:const Color(0xFFFFFFFF),
     bottomNavBackgroundColor: const Color(0xFF1A1A2E),
     bottomNavActiveColor: const Color(0xFFFFFFFF),
     bottomNavInactiveColor: const Color(0xFF6B7280),

@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:market_place_car/core/extension/opacity_of_color.dart';
 import 'package:market_place_car/core/global/theme/app_color/app_colors.dart';
-
+import 'package:market_place_car/core/global/theme/custom_theme/custom_button_theme.dart';
+extension ThemeDataExtension on ThemeData {
+  AppColors get appColors =>
+      brightness == Brightness.dark
+          ? const AppColorDark()
+          : const AppColorLight();
+}
 class AppTheme {
   static const AppColors darkColors = AppColorDark();
   static const AppColors lightColors = AppColorLight();
-
 
   static const String _defaultFont = 'AvenirArabic';
 
@@ -53,26 +58,31 @@ class AppTheme {
     );
   }
 
-  static ElevatedButtonThemeData _getButtonTheme({
-    required Color backgroundColor,
-    required Color textColor,
+  static ButtonStyle _buildCustomButtonStyle({
+    required Color baseBackgroundColor,
+    required Color baseTextColor,
+    required Color disabledBackgroundColor,
+    required Color disabledTextColor,
   }) {
-    return ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: backgroundColor,
-        foregroundColor: textColor,
-        fixedSize: const Size(350, 48),
-        disabledBackgroundColor: backgroundColor.changeOpacity(0.5),
-        elevation: 0,
-        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        textStyle: _style(
-          fontSize: 16,
-          fontWeight: FontWeight.w800,
-          lineHeight: 24,
-          textColor: textColor,
-        ),
-      ),
+    return ElevatedButton.styleFrom(
+      fixedSize: const Size(350, 48),
+      elevation: 0,
+      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    ).copyWith(
+      backgroundColor: WidgetStateProperty.resolveWith<Color>((states) {
+        if (states.contains(WidgetState.disabled)) {
+          return disabledBackgroundColor;
+        }
+        return baseBackgroundColor;
+      }),
+
+      foregroundColor: WidgetStateProperty.resolveWith<Color>((states) {
+        if (states.contains(WidgetState.disabled)) {
+          return disabledTextColor;
+        }
+        return baseTextColor;
+      }),
     );
   }
 
@@ -124,10 +134,28 @@ class AppTheme {
         ),
         elevation: 0,
       ),
-      elevatedButtonTheme: _getButtonTheme(
-        backgroundColor: darkColors.buttonBackgroundColor,
-        textColor: darkColors.buttonTextColor,
-      ),
+      extensions: [
+        CustomButtonTheme(
+          normalStyle: _buildCustomButtonStyle(
+            baseBackgroundColor:
+                darkColors.buttonBackgroundColor, // أبيض بالدارك
+            baseTextColor: darkColors.buttonTextColor, // أسود بالدارك
+            disabledBackgroundColor: darkColors.buttonBackgroundColor
+                .changeOpacity(0.3),
+            disabledTextColor: darkColors.buttonTextColor.changeOpacity(0.5),
+          ),
+          wrongStyle: _buildCustomButtonStyle(
+            baseBackgroundColor:
+                darkColors.dangerButtonColor, // أحمر بالدارك واللايت
+            baseTextColor: Colors.white,
+            disabledBackgroundColor: darkColors.dangerButtonColor.changeOpacity(
+              0.3,
+            ),
+            disabledTextColor: Colors.white.changeOpacity(0.5),
+          ),
+        ),
+      ],
+
       colorScheme: const ColorScheme.dark().copyWith(
         primary: darkColors.activeDotColor,
         surfaceContainerHighest: darkColors.inactiveDotColor,
@@ -151,7 +179,10 @@ class AppTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: darkColors.inputFocusedBorderColor, width: 1),
+          borderSide: BorderSide(
+            color: darkColors.inputFocusedBorderColor,
+            width: 1,
+          ),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
@@ -193,10 +224,26 @@ class AppTheme {
         ),
         elevation: 0,
       ),
-      elevatedButtonTheme: _getButtonTheme(
-        backgroundColor: lightColors.buttonBackgroundColor,
-        textColor: lightColors.buttonTextColor,
-      ),
+      extensions: [
+        CustomButtonTheme(
+          normalStyle: _buildCustomButtonStyle(
+            baseBackgroundColor:
+                lightColors.buttonBackgroundColor, // أسود باللايت
+            baseTextColor: lightColors.buttonTextColor, // أبيض باللايت
+            disabledBackgroundColor: lightColors.buttonBackgroundColor
+                .changeOpacity(0.3),
+            disabledTextColor: lightColors.buttonTextColor.changeOpacity(0.5),
+          ),
+          wrongStyle: _buildCustomButtonStyle(
+            baseBackgroundColor: lightColors.dangerButtonColor, // أحمر ثابت
+            baseTextColor: Colors.white,
+            disabledBackgroundColor: lightColors.dangerButtonColor
+                .changeOpacity(0.3),
+            disabledTextColor: Colors.white.changeOpacity(0.5),
+          ),
+        ),
+      ],
+
       colorScheme: const ColorScheme.light().copyWith(
         primary: lightColors.activeDotColor,
         surfaceContainerHighest: lightColors.inactiveDotColor,
@@ -220,7 +267,10 @@ class AppTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: lightColors.inputFocusedBorderColor, width: 1),
+          borderSide: BorderSide(
+            color: lightColors.inputFocusedBorderColor,
+            width: 1,
+          ),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),

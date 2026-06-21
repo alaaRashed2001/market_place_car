@@ -32,4 +32,5 @@ class AppImages {
   static const String seats = '${baseIconUrl}seats.svg';
   static const String transmission = '${baseIconUrl}transmission.svg';
   static const String share = '${baseIconUrl}share.svg';
+  static const String delete = '${baseIconUrl}delete.svg';
 }
