@@ -13,7 +13,7 @@ class WelcomeHeader extends StatelessWidget {
         Expanded(
           child: Text(
             'Welcome Alaa',
-            style: context.h1Regular28,
+            style: context.font28Regular,
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
           ).padEnd(8),

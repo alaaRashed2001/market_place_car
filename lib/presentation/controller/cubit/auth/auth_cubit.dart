@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:market_place_car/domain/usecases/auth/forgot_password_usecase.dart';
-import 'package:market_place_car/domain/usecases/auth/login_usecase.dart';
-import 'package:market_place_car/domain/usecases/auth/sign_up_usecase.dart';
-import 'package:market_place_car/domain/usecases/auth/verify_otp_usecase.dart';
-import 'package:market_place_car/domain/usecases/auth/social_login_usecase.dart';
-import 'package:market_place_car/domain/usecases/auth/reset_password_usecase.dart';
+import 'package:market_place_car/domain/usecases/auth/forgot_password_use_case.dart';
+import 'package:market_place_car/domain/usecases/auth/login_use_case.dart';
+import 'package:market_place_car/domain/usecases/auth/sign_up_use_case.dart';
+import 'package:market_place_car/domain/usecases/auth/verify_otp_use_case.dart';
+import 'package:market_place_car/domain/usecases/auth/social_login_use_case.dart';
+import 'package:market_place_car/domain/usecases/auth/reset_password_use_case.dart';
 
 import 'auth_state.dart';
 
@@ -103,7 +103,7 @@ class AuthCubit extends Cubit<AuthState> {
     );
     result.fold(
       (failure) => emit(AuthError(failure.message)),
-      (_) => emit(AuthInitial()), // Return to initial state (e.g. login ready)
+      (_) => emit(AuthInitial()),
     );
   }
 

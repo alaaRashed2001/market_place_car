@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_field/countries.dart';
 import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/extension/opacity_of_color.dart';
-import 'package:market_place_car/presentation/components/auth/auth_text_field.dart';
+import 'package:market_place_car/core/shared_component/app_text_form_field.dart';
 
 class CountryPickerBottomSheet extends StatefulWidget {
   final ScrollController scrollController;
@@ -35,7 +35,7 @@ class _CountryPickerBottomSheetState extends State<CountryPickerBottomSheet> {
       child: Column(
         spacing: 10,
         children: [
-          AuthTextField(
+          AppTextFormField(
             controller: _searchController,
             hintText: "Search country...",
             isSearch: true,

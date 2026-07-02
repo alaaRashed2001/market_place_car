@@ -3,11 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_place_car/core/constants/app_images.dart';
 import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/global/localization/locale/app_localizations_setup.dart';
-import 'package:market_place_car/presentation/components/shared_component/app_primary_button.dart';
-import 'package:market_place_car/presentation/components/shared_component/app_text_button.dart';
-import 'package:market_place_car/presentation/components/shared_component/page_indicator.dart';
+import 'package:market_place_car/core/shared_component/custom_elevated_button.dart';
+import 'package:market_place_car/core/shared_component/page_indicator.dart';
 import 'package:market_place_car/presentation/controller/cubit/onboarding/onboarding_state.dart';
-import 'package:market_place_car/presentation/helper/navigator_helper.dart';
 import 'package:market_place_car/presentation/screens/auth/login_screen.dart';
 
 class OnboardingPageModel {
@@ -76,11 +74,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return BlocConsumer<OnboardingCubit, OnboardingState>(
       listener: (context, state) {
         if (state is OnboardingCompleted) {
-          NavigatorHelper.jump(
-            context,
-            screen: const LoginScreen(),
-            replace: true,
-          );
+          // NavigatorHelper.jump(
+          //   context,
+          //   screen: const LoginScreen(),
+          //   replace: true,
+          // );
         }
       },
       builder: (context, state) {
@@ -184,8 +182,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Column(
       spacing: 16,
       children: [
-        AppPrimaryButton(text: l.next, onPressed: () => _onNext(currentPage)),
-        AppTextButton(text: l.skip, onPressed: cubit.completeOnboarding),
+        CustomElevatedButton(text: l.next, onPressed: () => _onNext(currentPage)),
+      //  AppTextButton(text: l.skip, onPressed: cubit.completeOnboarding),
       ],
     );
   }
@@ -195,15 +193,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Column(
       spacing: 16,
       children: [
-        AppPrimaryButton(
+        CustomElevatedButton(
           text: l.joinNowAsUser,
           onPressed: cubit.completeOnboarding,
         ),
-        AppPrimaryButton(
+        CustomElevatedButton(
           text: l.joinNowAsShowroom,
           onPressed: cubit.completeOnboarding,
         ),
-        AppTextButton(text: l.skip, onPressed: cubit.completeOnboarding),
+       // AppTextButton(text: l.skip, onPressed: cubit.completeOnboarding),
       ],
     );
   }

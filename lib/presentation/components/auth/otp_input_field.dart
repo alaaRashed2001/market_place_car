@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/extension/responsive_layout_extention.dart';
-import 'package:market_place_car/presentation/components/auth/auth_text_field.dart';
+import 'package:market_place_car/core/shared_component/app_text_form_field.dart';
 
 class OtpInputField extends StatelessWidget {
   final int length;
@@ -25,7 +25,7 @@ class OtpInputField extends StatelessWidget {
           child: SizedBox(
             width: context.wp(18),
             height: context.hp(6),
-            child: AuthTextField(
+            child: AppTextFormField(
               controller: controllers[index],
               focusNode: focusNodes[index],
               inputType: TextInputType.number,

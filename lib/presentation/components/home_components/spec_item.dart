@@ -26,7 +26,7 @@ class SpecItem extends StatelessWidget {
             child: Text(
               label,
               overflow: TextOverflow.ellipsis,
-              style: context.bodyRegular14?.copyWith(color: Color(0xFF999999)),
+              style: context.font14Regular?.copyWith(color: Color(0xFF999999)),
             ).padStart(4),
           ),
         ],

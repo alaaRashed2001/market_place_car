@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/countries.dart';
 import 'package:market_place_car/core/global/localization/locale/app_localizations_setup.dart';
-import 'package:market_place_car/presentation/components/auth/auth_text_field.dart';
+import 'package:market_place_car/core/shared_component/app_bottom_sheet.dart';
+import 'package:market_place_car/core/shared_component/app_text_form_field.dart';
 import 'package:market_place_car/presentation/components/auth/country_prefix_selector.dart';
-import 'package:market_place_car/presentation/components/shared_component/app_bottom_sheet.dart';
 import 'package:market_place_car/presentation/components/auth/country_picker_bottom_sheet.dart';
 
 class AuthPhoneTextField extends StatefulWidget {
@@ -62,7 +62,7 @@ class _AuthPhoneTextFieldState extends State<AuthPhoneTextField> {
   Widget build(BuildContext context) {
     final l = context.l10n;
 
-    return AuthTextField(
+    return AppTextFormField(
       controller: widget.controller,
       hintText: l.phoneNumber,
       inputType: TextInputType.phone,

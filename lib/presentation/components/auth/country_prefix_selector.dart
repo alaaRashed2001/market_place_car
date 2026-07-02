@@ -30,7 +30,7 @@ class CountryPrefixSelector extends StatelessWidget {
             context.addHorizontalSpace(4),
             Text(
               "+${selectedCountry.displayCC}",
-              style: context.bodyRegular14,
+              style: context.font14Regular,
             ),
             const Icon(
               Icons.arrow_drop_down,

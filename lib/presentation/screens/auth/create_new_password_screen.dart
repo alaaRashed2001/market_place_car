@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/global/localization/locale/app_localizations_setup.dart';
-import 'package:market_place_car/presentation/components/auth/auth_text_field.dart';
-import 'package:market_place_car/presentation/components/shared_component/app_primary_button.dart';
+import 'package:market_place_car/core/shared_component/custom_elevated_button.dart';
+import 'package:market_place_car/core/shared_component/app_text_form_field.dart';
 import 'package:market_place_car/presentation/controller/cubit/auth/auth_cubit.dart';
 import 'package:market_place_car/presentation/controller/cubit/auth/auth_state.dart';
-import 'package:market_place_car/presentation/helper/navigator_helper.dart';
 import 'package:market_place_car/presentation/screens/auth/login_screen.dart';
 
 class CreateNewPasswordScreen extends StatefulWidget {
@@ -61,11 +60,11 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
               ),
             );
             // Navigate back to Login and clear history
-            NavigatorHelper.jump(
-              context,
-              screen: const LoginScreen(),
-              replace: true,
-            );
+            // NavigatorHelper.jump(
+            //   context,
+            //   screen: const LoginScreen(),
+            //   replace: true,
+            // );
           } else if (state is AuthError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -117,7 +116,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                     child: Column(
                       children: [
                         // New Password
-                        AuthTextField(
+                        AppTextFormField(
                           controller: _passwordController,
                           hintText: l.newPassword,
                           obscure: true,
@@ -135,7 +134,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                         context.addVerticalSpace(16),
 
                         // Confirm Password
-                        AuthTextField(
+                        AppTextFormField(
                           controller: _confirmPasswordController,
                           hintText: l.confirmPassword,
                           obscure: true,
@@ -155,7 +154,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                   ),
                   context.addVerticalSpace(40),
 
-                  AppPrimaryButton(
+                  CustomElevatedButton(
                     text: l.confirm,
                     isLoading: isLoading,
                     onPressed: _submitReset,

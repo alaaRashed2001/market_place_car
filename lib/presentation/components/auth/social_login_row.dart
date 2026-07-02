@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/extension/opacity_of_color.dart';
-import 'package:market_place_car/presentation/components/shared_component/app_bottom_sheet.dart';
+import 'package:market_place_car/core/shared_component/app_bottom_sheet.dart';
 import 'package:market_place_car/presentation/controller/cubit/auth/auth_cubit.dart';
 
 class SocialLoginRow extends StatelessWidget {

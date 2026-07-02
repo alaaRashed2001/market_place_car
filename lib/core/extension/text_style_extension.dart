@@ -1,34 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:market_place_car/core/global/theme/app_color/app_colors.dart';
+
+extension ThemeDataExtension on ThemeData {
+  AppColors get appColors => brightness == Brightness.dark
+      ? const AppColorDark()
+      : const AppColorLight();
+}
 
 extension TextStyleExtension on BuildContext {
   TextTheme get _textTheme => Theme.of(this).textTheme;
 
-  TextStyle? get h1Bold34 => _textTheme.displayLarge;
-  TextStyle? get h1Regular34 => _textTheme.displayMedium;
-  TextStyle? get h1Bold28 => _textTheme.displaySmall;
-  TextStyle? get h1Regular28 => _textTheme.headlineLarge;
+  TextStyle? get font34Bold => _textTheme.displayLarge;
+  TextStyle? get font34Regular => _textTheme.displayMedium;
 
-  TextStyle? get h2Bold26 => _textTheme.headlineMedium;
-  TextStyle? get h2Regular26 => _textTheme.headlineSmall;
-  TextStyle? get h2Bold22 => _textTheme.titleLarge;
-  TextStyle? get h2Regular22 => _textTheme.titleMedium;
+  TextStyle? get font28Bold => _textTheme.displaySmall;
+  TextStyle? get font28Regular => _textTheme.headlineLarge;
 
-  TextStyle? get titleBold18 => _textTheme.titleSmall;
-  TextStyle? get titleRegular18 => _textTheme.bodyLarge;
+  TextStyle? get font26Bold => _textTheme.headlineMedium;
+  TextStyle? get font26Regular => _textTheme.headlineSmall;
 
-  TextStyle? get buttonBold => _textTheme.labelLarge;
-  TextStyle? get buttonRegular => _textTheme.labelMedium;
+  TextStyle? get font22Bold => _textTheme.titleLarge;
+  TextStyle? get font22Regular => _textTheme.titleMedium;
 
-  TextStyle? get inputBold16 => _textTheme.bodyMedium;
-  TextStyle? get inputRegular16 => _textTheme.bodySmall;
-  TextStyle? get inputBold14 => _textTheme.labelSmall;
+  TextStyle? get font18Bold => _textTheme.titleSmall;
+  TextStyle? get font18Regular => _textTheme.bodyLarge;
 
-  TextStyle? get bodyBold14 => _textTheme.labelLarge?.copyWith(
-    fontSize: 14,
-    fontWeight: FontWeight.w900,
-  );
-  TextStyle? get bodyRegular14 => _textTheme.labelMedium?.copyWith(
-    fontSize: 14,
-    fontWeight: FontWeight.w400,
-  );
+  TextStyle? get font16Bold => _textTheme.bodyMedium;
+  TextStyle? get font16Regular => _textTheme.bodySmall;
+
+  TextStyle? get font14Bold => _textTheme.labelLarge;
+  TextStyle? get font14Regular => _textTheme.labelMedium;
 }

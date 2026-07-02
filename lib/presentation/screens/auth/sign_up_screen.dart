@@ -5,14 +5,13 @@ import 'package:market_place_car/core/constants/app_images.dart';
 import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/extension/text_style_extension.dart';
 import 'package:market_place_car/core/global/localization/locale/app_localizations_setup.dart';
+import 'package:market_place_car/core/shared_component/custom_elevated_button.dart';
 import 'package:market_place_car/presentation/components/auth/auth_phone_text_field.dart';
-import 'package:market_place_car/presentation/components/auth/auth_text_field.dart';
-import 'package:market_place_car/presentation/components/shared_component/app_primary_button.dart';
+import 'package:market_place_car/core/shared_component/app_text_form_field.dart';
 import 'package:market_place_car/presentation/controller/cubit/auth/auth_cubit.dart';
 import 'package:market_place_car/presentation/controller/cubit/auth/auth_state.dart';
 import 'package:market_place_car/presentation/helper/app_asset_helper.dart';
 import 'package:market_place_car/presentation/helper/auth_validators.dart';
-import 'package:market_place_car/presentation/helper/navigator_helper.dart';
 import 'package:market_place_car/presentation/helper/snack_bar_helper.dart';
 import 'package:market_place_car/presentation/screens/auth/verify_signup_otp_screen.dart';
 
@@ -77,7 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               error: false,
             );
 
-            NavigatorHelper.jump(context, screen: const OtpVerificationPage());
+         //   NavigatorHelper.jump(context, screen: const OtpVerificationPage());
           } else if (state is AuthError) {
             SnackBarHelper.showSnackBar(
               context,
@@ -100,12 +99,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   height: 40,
                 ),
                 context.addVerticalSpace(12),
-                Text(l.joinCarAds, style: context.titleBold18),
+                Text(l.joinCarAds, style: context.font18Bold),
                 context.addVerticalSpace(12),
                 Text(
                   l.signUpSubtitle,
                   textAlign: TextAlign.center,
-                  style: context.titleBold18,
+                  style: context.font18Bold,
                 ),
                 context.addVerticalSpace(12),
 
@@ -114,7 +113,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: Column(
                     children: [
                       // Full Name
-                      AuthTextField(
+                      AppTextFormField(
                         controller: _nameController,
                         hintText: l.fullName,
                         inputType: TextInputType.name,
@@ -124,7 +123,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       context.addVerticalSpace(12),
 
                       // Email
-                      AuthTextField(
+                      AppTextFormField(
                         controller: _emailController,
                         hintText: l.emailAddress,
                         inputType: TextInputType.emailAddress,
@@ -143,7 +142,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       context.addVerticalSpace(12),
 
                       // Password
-                      AuthTextField(
+                      AppTextFormField(
                         controller: _passwordController,
                         hintText: l.password,
                         obscure: true,
@@ -157,7 +156,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       context.addVerticalSpace(16),
 
                       // Confirm Password
-                      AuthTextField(
+                      AppTextFormField(
                         controller: _confirmPasswordController,
                         hintText: l.confirmPassword,
                         obscure: true,
@@ -174,19 +173,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 context.addVerticalSpace(12),
 
-                // Register Button
-                AppPrimaryButton(
+
+                CustomElevatedButton(
                   text: l.signUp,
                   isLoading: isLoading,
                   onPressed: _submitSignUp,
                 ),
                 context.addVerticalSpace(12),
 
-                // Already have account
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(l.alreadyHaveAccount, style: context.titleBold18),
+                    Text(l.alreadyHaveAccount, style: context.font18Bold),
                     const SizedBox(width: 8),
                     GestureDetector(
                       onTap: () => Navigator.pop(context),

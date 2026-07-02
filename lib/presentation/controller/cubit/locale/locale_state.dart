@@ -14,7 +14,6 @@ class LocaleCubit extends Cubit<LocaleState> {
 
   LocaleCubit({required this.sharedPreferences}) : super(LocaleInitial());
 
-  // استدعاء هذه الدالة عند تشغيل التطبيق (مثلاً في الـ main أو الـ MaterialApp)
   void loadSavedLocale() {
     final code = sharedPreferences.getString(LocaleEntity.prefKey);
     final locale = code != null ? LocaleEntity.fromCode(code) : LocaleEntity.english;

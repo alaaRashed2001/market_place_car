@@ -3,28 +3,13 @@ import 'package:market_place_car/core/constants/app_images.dart';
 import 'package:market_place_car/core/extension/app_box_shadow.dart';
 import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/extension/text_style_extension.dart';
+import 'package:market_place_car/core/shared_component/page_indicator.dart';
+import 'package:market_place_car/core/shared_component/vertical_divider_container.dart';
+import 'package:market_place_car/domain/entities/home/car_listing.dart';
 import 'package:market_place_car/presentation/components/home_components/spec_item.dart';
-import 'package:market_place_car/presentation/components/shared_component/page_indicator.dart';
-import 'package:market_place_car/presentation/components/shared_component/vertical_divider_container.dart';
 import 'package:market_place_car/presentation/helper/app_asset_helper.dart';
 
-class CarListing {
-  const CarListing({
-    required this.imageUrl,
-    required this.brand,
-    required this.price,
-    required this.transmission,
-    required this.seats,
-    required this.fuelType,
-  });
 
-  final String imageUrl;
-  final String brand;
-  final String price;
-  final String transmission;
-  final int seats;
-  final String fuelType;
-}
 
 class CarSwiperCard extends StatefulWidget {
   const CarSwiperCard({super.key, required this.listings});
@@ -99,14 +84,14 @@ class HeaderRow extends StatelessWidget {
             listing.brand,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: context.titleBold18,
+            style: context.font18Bold,
           ),
         ),
         RichText(
           text: TextSpan(
             children: [
-              TextSpan(text: "${listing.price}/", style: context.bodyBold14),
-              TextSpan(text: 'AED', style: context.bodyRegular14),
+              TextSpan(text: "${listing.price}/", style: context.font14Bold),
+              TextSpan(text: 'AED', style: context.font14Regular),
             ],
           ),
         ).padStart(8),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:market_place_car/core/constants/temp.dart';
 import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/extension/text_style_extension.dart';
+import 'package:market_place_car/domain/entities/home/car_listing.dart';
+import 'package:market_place_car/domain/entities/home/showroom.dart';
 import 'package:market_place_car/presentation/components/home_components/car_listing_card.dart';
 import 'package:market_place_car/presentation/components/home_components/showroom_card.dart';
 import 'package:market_place_car/presentation/components/home_components/welcome_header.dart';
@@ -122,11 +124,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    WelcomeHeader().padBottom(16),
+                    WelcomeHeader(),
+16.h,
+                    CarSwiperCard(listings: _carListings),
 
-                    CarSwiperCard(listings: _carListings).padBottom(24),
-
-                    Text('Top rated Showroom', style: context.titleRegular18),
+                    24.h,
+                    Text('Top rated Showroom', style: context.font18Regular),
                   ],
                 ),
               ),

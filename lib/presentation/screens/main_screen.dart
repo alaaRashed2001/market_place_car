@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:market_place_car/core/constants/app_images.dart';
-import 'package:market_place_car/core/global/theme/theme_data/app_theme.dart';
+import 'package:market_place_car/core/extension/text_style_extension.dart';
 import 'package:market_place_car/presentation/helper/app_asset_helper.dart';
 import 'package:market_place_car/presentation/screens/add/add_screen.dart';
 import 'package:market_place_car/presentation/screens/explore/explore_screen.dart';
@@ -28,7 +28,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final appColors = Theme.of(context).appColors;
+    final colors = Theme.of(context).appColors;
     return Scaffold(
       body: IndexedStack(index: _currentIndex, children: _screens),
 
@@ -49,13 +49,13 @@ class _MainScreenState extends State<MainScreen> {
               AppImages.home,
               width: 24,
               height: 24,
-              color: appColors.bottomNavInactiveColor,
+              color: colors.bottomNavInactiveColor,
             ),
             activeIcon: AppAssetHelper.svgImage(
               AppImages.homeActive,
               width: 24,
               height: 24,
-              color: appColors.bottomNavActiveColor,
+              color: colors.bottomNavActiveColor,
             ),
             label: 'Home',
           ),
@@ -64,13 +64,13 @@ class _MainScreenState extends State<MainScreen> {
               AppImages.explore,
               width: 24,
               height: 24,
-              color: appColors.bottomNavInactiveColor,
+              color: colors.bottomNavInactiveColor,
             ),
             activeIcon: AppAssetHelper.svgImage(
               AppImages.exploreActive,
               width: 24,
               height: 24,
-              color: appColors.bottomNavActiveColor,
+              color: colors.bottomNavActiveColor,
             ),
             label: 'explore',
           ),
@@ -79,13 +79,13 @@ class _MainScreenState extends State<MainScreen> {
               AppImages.add,
               width: 24,
               height: 24,
-              color: appColors.bottomNavInactiveColor,
+              color: colors.bottomNavInactiveColor,
             ),
             activeIcon: AppAssetHelper.svgImage(
               AppImages.addActive,
               width: 24,
               height: 24,
-              color: appColors.bottomNavActiveColor,
+              color: colors.bottomNavActiveColor,
             ),
             label: 'add',
           ),
@@ -94,13 +94,13 @@ class _MainScreenState extends State<MainScreen> {
               AppImages.history,
               width: 24,
               height: 24,
-              color: appColors.bottomNavInactiveColor,
+              color: colors.bottomNavInactiveColor,
             ),
             activeIcon: AppAssetHelper.svgImage(
               AppImages.historyActive,
               width: 24,
               height: 24,
-              color: appColors.bottomNavActiveColor,
+              color: colors.bottomNavActiveColor,
             ),
             label: 'history',
           ),
@@ -109,13 +109,13 @@ class _MainScreenState extends State<MainScreen> {
               AppImages.profile,
               width: 24,
               height: 24,
-              color: appColors.bottomNavInactiveColor,
+              color: colors.bottomNavInactiveColor,
             ),
             activeIcon: AppAssetHelper.svgImage(
               AppImages.profileActive,
               width: 24,
               height: 24,
-              color: appColors.bottomNavActiveColor,
+              color: colors.bottomNavActiveColor,
             ),
             label: 'profile',
           ),

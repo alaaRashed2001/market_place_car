@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/global/localization/locale/app_localizations_setup.dart';
+import 'package:market_place_car/core/shared_component/custom_elevated_button.dart';
+import 'package:market_place_car/core/shared_component/language_selector_widget.dart';
+import 'package:market_place_car/core/shared_component/theme_switch_widget.dart';
 import 'package:market_place_car/data/services/service_locator.dart';
 import 'package:market_place_car/domain/repositories/auth/auth_repository.dart';
-import 'package:market_place_car/presentation/components/shared_component/app_primary_button.dart';
-import 'package:market_place_car/presentation/components/shared_component/enums.dart';
-import 'package:market_place_car/presentation/components/shared_component/theme_switch_widget.dart';
-import 'package:market_place_car/presentation/components/shared_component/language_selector_widget.dart';
 import 'package:market_place_car/presentation/controller/cubit/auth/auth_cubit.dart';
-import 'package:market_place_car/presentation/helper/navigator_helper.dart';
 import 'package:market_place_car/presentation/screens/auth/login_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -52,7 +50,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     context.addVerticalSpace(12),
-                   Container(
+                    Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.white, width: 4),
@@ -125,7 +123,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       color: isDark ? const Color(0xFF16161A) : Colors.white,
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
-                        color: isDark ? Colors.white.withOpacity(0.05) : Colors.grey.shade200,
+                        color: isDark
+                            ? Colors.white.withOpacity(0.05)
+                            : Colors.grey.shade200,
                       ),
                     ),
                     child: Column(
@@ -133,7 +133,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         // Dark Mode Toggle row
                         ListTile(
                           leading: Icon(
-                            isDark ? Icons.dark_mode_rounded : Icons.light_mode_rounded,
+                            isDark
+                                ? Icons.dark_mode_rounded
+                                : Icons.light_mode_rounded,
                             color: isDark ? Colors.yellow : Colors.orange,
                           ),
                           title: Text(
@@ -160,7 +162,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       color: isDark ? const Color(0xFF16161A) : Colors.white,
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
-                        color: isDark ? Colors.white.withOpacity(0.05) : Colors.grey.shade200,
+                        color: isDark
+                            ? Colors.white.withOpacity(0.05)
+                            : Colors.grey.shade200,
                       ),
                     ),
                     child: Column(
@@ -171,14 +175,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           isDark: isDark,
                           onTap: () {},
                         ),
-                        Divider(height: 1, color: isDark ? Colors.white10 : Colors.grey.shade100),
+                        Divider(
+                          height: 1,
+                          color: isDark ? Colors.white10 : Colors.grey.shade100,
+                        ),
                         _buildActionTile(
                           icon: Icons.shield_outlined,
                           title: "Privacy Policy",
                           isDark: isDark,
                           onTap: () {},
                         ),
-                        Divider(height: 1, color: isDark ? Colors.white10 : Colors.grey.shade100),
+                        Divider(
+                          height: 1,
+                          color: isDark ? Colors.white10 : Colors.grey.shade100,
+                        ),
                         _buildActionTile(
                           icon: Icons.contact_support_outlined,
                           title: "Contact Support",
@@ -191,53 +201,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   context.addVerticalSpace(12),
 
                   // Logout button
-                  AppPrimaryButton(text: "Logout",   onPressed: () {
-                    // Logout action
-                    sl<AuthRepository>().logout();
-                    context.read<AuthCubit>().logout();
-                    NavigatorHelper.jump(
-                      context,
-                      screen: const LoginScreen(),
-                      replace: true,
-                    );
-                  },
-                    status: ButtonStatus.wrong,
-
+                  CustomElevatedButton(
+                    text: "Logout",
+                    onPressed: () {
+                      // Logout action
+                      sl<AuthRepository>().logout();
+                      context.read<AuthCubit>().logout();
+                      // NavigatorHelper.jump(
+                      //   context,
+                      //   screen: const LoginScreen(),
+                      //   replace: true,
+                      // );
+                    },
                   ),
-                  // ElevatedButton(
-                  //   onPressed: () {
-                  //     // Logout action
-                  //     sl<AuthRepository>().logout();
-                  //     context.read<AuthCubit>().logout();
-                  //     NavigatorHelper.jump(
-                  //       context,
-                  //       screen: const LoginScreen(),
-                  //       replace: true,
-                  //     );
-                  //   },
-                  //   style: ElevatedButton.styleFrom(
-                  //     backgroundColor: Colors.redAccent.shade700,
-                  //     foregroundColor: Colors.white,
-                  //     minimumSize: const Size(double.infinity, 52),
-                  //     shape: RoundedRectangleBorder(
-                  //       borderRadius: BorderRadius.circular(16),
-                  //     ),
-                  //   ),
-                  //   child: Row(
-                  //     mainAxisAlignment: MainAxisAlignment.center,
-                  //     children: [
-                  //       const Icon(Icons.logout_rounded, size: 20),
-                  //       const SizedBox(width: 8),
-                  //       Text(
-                  //         l.logout,
-                  //         style: const TextStyle(
-                  //           fontSize: 16,
-                  //           fontWeight: FontWeight.bold,
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
+
                   const SizedBox(height: 40),
                 ],
               ),
@@ -296,7 +273,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const SizedBox(height: 2),
                   Text(
                     phone,
-                    style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
@@ -320,7 +300,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const SizedBox(height: 2),
                   Text(
                     email,
-                    style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),

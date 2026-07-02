@@ -6,14 +6,12 @@ import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/extension/responsive_layout_extention.dart';
 import 'package:market_place_car/core/extension/text_style_extension.dart';
 import 'package:market_place_car/core/global/localization/locale/app_localizations_setup.dart';
+import 'package:market_place_car/core/shared_component/custom_elevated_button.dart';
+import 'package:market_place_car/core/shared_component/back_icon_button.dart';
 import 'package:market_place_car/presentation/components/auth/otp_input_field.dart';
-import 'package:market_place_car/presentation/components/shared_component/app_primary_button.dart';
-import 'package:market_place_car/presentation/components/shared_component/app_text_button.dart';
-import 'package:market_place_car/presentation/components/shared_component/back_icon_button.dart';
 import 'package:market_place_car/presentation/controller/cubit/auth/auth_cubit.dart';
 import 'package:market_place_car/presentation/controller/cubit/auth/auth_state.dart';
 import 'package:market_place_car/presentation/helper/app_asset_helper.dart';
-import 'package:market_place_car/presentation/helper/navigator_helper.dart';
 import 'package:market_place_car/presentation/helper/snack_bar_helper.dart';
 import 'package:market_place_car/presentation/screens/auth/create_new_password_screen.dart';
 
@@ -97,10 +95,10 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
               error: false,
             );
 
-            NavigatorHelper.jump(
-              context,
-              screen: CreateNewPasswordScreen(phone: widget.phone),
-            );
+            // NavigatorHelper.jump(
+            //   context,
+            //   screen: CreateNewPasswordScreen(phone: widget.phone),
+            // );
           } else if (state is AuthError) {
             SnackBarHelper.showSnackBar(
               context,
@@ -125,7 +123,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
 
                 Text(
                   l.verifyPhoneNumber,
-                  style: context.titleBold18,
+                  style: context.font18Bold,
                   textAlign: TextAlign.center,
                 ).padTop(16),
 
@@ -134,14 +132,14 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                 Text(
                   l.otpSentTo(widget.phone),
                   textAlign: TextAlign.center,
-                  style: context.bodyRegular14,
+                  style: context.font14Regular,
                 ).padSymmetricHorizon(34),
                 OtpInputField(
                   controllers: _otpControllers,
                   focusNodes: _focusNodes,
                 ).padTop(32),
 
-                AppPrimaryButton(
+                CustomElevatedButton(
                   text: l.verify,
                   isLoading: isLoading,
                   onPressed: _verifyOtp,
@@ -152,20 +150,21 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                 _seconds > 0
                     ? Text(
                         l.resendCodeIn(_seconds),
-                        style: context.inputRegular16?.copyWith(
+                        style: context.font16Regular?.copyWith(
                           fontWeight: FontWeight.w400,
                           height: 1.0,
                         ),
                       )
-                    : AppTextButton(
-                        onPressed: () {
-                          _startTimer();
-                          context.read<AuthCubit>().forgotPassword(
-                            phoneNumber: widget.phone,
-                          );
-                        },
-                        text: l.resendCode,
-                      ),
+                    : Text("data")
+                // AppTextButton(
+                //         onPressed: () {
+                //           _startTimer();
+                //           context.read<AuthCubit>().forgotPassword(
+                //             phoneNumber: widget.phone,
+                //           );
+                //         },
+                //         text: l.resendCode,
+                //       ),
               ],
             ),
           );

@@ -4,7 +4,7 @@ import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/extension/responsive_layout_extention.dart';
 import 'package:market_place_car/presentation/helper/app_asset_helper.dart';
 
-class AuthTextField extends StatefulWidget {
+class AppTextFormField extends StatefulWidget {
   final FocusNode? focusNode;
   final String? hintText;
   final TextInputType? inputType;
@@ -23,7 +23,7 @@ class AuthTextField extends StatefulWidget {
   final int maxLines;
   final VoidCallback? onClear;
 
-  const AuthTextField({
+  const AppTextFormField({
     super.key,
     this.hintText,
     this.inputType,
@@ -45,10 +45,10 @@ class AuthTextField extends StatefulWidget {
   });
 
   @override
-  State<AuthTextField> createState() => _AuthTextFieldState();
+  State<AppTextFormField> createState() => _AppTextFormFieldState();
 }
 
-class _AuthTextFieldState extends State<AuthTextField> {
+class _AppTextFormFieldState extends State<AppTextFormField> {
   late bool showPassword = widget.obscure;
 
   late bool _isTyping = widget.controller.text.isNotEmpty;

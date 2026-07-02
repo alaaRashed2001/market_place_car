@@ -15,20 +15,18 @@ class ThemeDarkState extends ThemeState {
   const ThemeDarkState() : super(isDark: true);
 }
 
-// --- Theme Cubit ---
 class ThemeCubit extends Cubit<ThemeState> {
   final SharedPreferences sharedPreferences;
   static const String _themeKey = 'IS_DARK_THEME';
 
-  ThemeCubit({required this.sharedPreferences}) : super(const ThemeLightState());
+  ThemeCubit({required this.sharedPreferences})
+    : super(const ThemeLightState());
 
-  /// استدعاء هذه الدالة عند تشغيل التطبيق (موجودة بالفعل في الـ main)
   void loadSavedTheme() {
     final isDark = sharedPreferences.getBool(_themeKey) ?? false;
     isDark ? emit(const ThemeDarkState()) : emit(const ThemeLightState());
   }
 
-  /// تبديل الثيم وحفظه مباشرة
   Future<void> toggleTheme() async {
     final currentIsDark = state.isDark;
     final nextIsDark = !currentIsDark;

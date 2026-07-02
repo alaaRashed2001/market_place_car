@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:market_place_car/core/extension/opacity_of_color.dart';
 import 'package:market_place_car/core/global/theme/app_color/app_colors.dart';
-import 'package:market_place_car/core/global/theme/custom_theme/custom_button_theme.dart';
-extension ThemeDataExtension on ThemeData {
-  AppColors get appColors =>
-      brightness == Brightness.dark
-          ? const AppColorDark()
-          : const AppColorLight();
-}
+import 'package:market_place_car/core/global/theme/font_weight/font_weight_helper.dart';
+
 class AppTheme {
   static const AppColors darkColors = AppColorDark();
   static const AppColors lightColors = AppColorLight();
@@ -30,59 +24,36 @@ class AppTheme {
   }
 
   static TextTheme _buildTextTheme({required Color textColor}) {
-    TextStyle create(double size, FontWeight weight, double lineHeight) {
+    TextStyle create(double size, FontWeight weight, double figmaLineHeight) {
       return _style(
         fontSize: size,
         fontWeight: weight,
-        lineHeight: lineHeight,
+        lineHeight: figmaLineHeight / size,
         textColor: textColor,
       );
     }
 
     return TextTheme(
-      displayLarge: create(34, FontWeight.w700, 40),
-      displayMedium: create(34, FontWeight.w400, 40),
-      displaySmall: create(28, FontWeight.w700, 32),
-      headlineLarge: create(28, FontWeight.w400, 32),
-      headlineMedium: create(26, FontWeight.w700, 30),
-      headlineSmall: create(26, FontWeight.w400, 30),
-      titleLarge: create(22, FontWeight.w700, 28),
-      titleMedium: create(22, FontWeight.w400, 28),
-      titleSmall: create(18, FontWeight.w900, 18),
-      bodyLarge: create(18, FontWeight.w400, 24),
-      labelLarge: create(16, FontWeight.w700, 24),
-      labelMedium: create(16, FontWeight.w400, 24),
-      bodyMedium: create(16, FontWeight.w700, 24),
-      bodySmall: create(16, FontWeight.w400, 24),
-      labelSmall: create(14, FontWeight.w700, 20),
-    );
-  }
+      displayLarge: create(34, FontWeightHelper.bold, 40),
+      displayMedium: create(34, FontWeightHelper.regular, 40),
 
-  static ButtonStyle _buildCustomButtonStyle({
-    required Color baseBackgroundColor,
-    required Color baseTextColor,
-    required Color disabledBackgroundColor,
-    required Color disabledTextColor,
-  }) {
-    return ElevatedButton.styleFrom(
-      fixedSize: const Size(350, 48),
-      elevation: 0,
-      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-    ).copyWith(
-      backgroundColor: WidgetStateProperty.resolveWith<Color>((states) {
-        if (states.contains(WidgetState.disabled)) {
-          return disabledBackgroundColor;
-        }
-        return baseBackgroundColor;
-      }),
+      displaySmall: create(28, FontWeightHelper.bold, 32),
+      headlineLarge: create(28, FontWeightHelper.regular, 32),
 
-      foregroundColor: WidgetStateProperty.resolveWith<Color>((states) {
-        if (states.contains(WidgetState.disabled)) {
-          return disabledTextColor;
-        }
-        return baseTextColor;
-      }),
+      headlineMedium: create(26, FontWeightHelper.bold, 30),
+      headlineSmall: create(26, FontWeightHelper.regular, 30),
+
+      titleLarge: create(22, FontWeightHelper.bold, 28),
+      titleMedium: create(22, FontWeightHelper.regular, 28),
+
+      titleSmall: create(18, FontWeightHelper.bold, 24),
+      bodyLarge: create(18, FontWeightHelper.regular, 24),
+
+      bodyMedium: create(16, FontWeightHelper.bold, 24),
+      bodySmall: create(16, FontWeightHelper.regular, 24),
+
+      labelLarge: create(14, FontWeightHelper.bold, 20),
+      labelMedium: create(14, FontWeightHelper.regular, 20),
     );
   }
 
@@ -134,27 +105,6 @@ class AppTheme {
         ),
         elevation: 0,
       ),
-      extensions: [
-        CustomButtonTheme(
-          normalStyle: _buildCustomButtonStyle(
-            baseBackgroundColor:
-                darkColors.buttonBackgroundColor, // أبيض بالدارك
-            baseTextColor: darkColors.buttonTextColor, // أسود بالدارك
-            disabledBackgroundColor: darkColors.buttonBackgroundColor
-                .changeOpacity(0.3),
-            disabledTextColor: darkColors.buttonTextColor.changeOpacity(0.5),
-          ),
-          wrongStyle: _buildCustomButtonStyle(
-            baseBackgroundColor:
-                darkColors.dangerButtonColor, // أحمر بالدارك واللايت
-            baseTextColor: Colors.white,
-            disabledBackgroundColor: darkColors.dangerButtonColor.changeOpacity(
-              0.3,
-            ),
-            disabledTextColor: Colors.white.changeOpacity(0.5),
-          ),
-        ),
-      ],
 
       colorScheme: const ColorScheme.dark().copyWith(
         primary: darkColors.activeDotColor,
@@ -168,6 +118,7 @@ class AppTheme {
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: darkColors.inputFillColor,
+        isDense: true,
         contentPadding: const EdgeInsets.all(16),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
@@ -224,25 +175,6 @@ class AppTheme {
         ),
         elevation: 0,
       ),
-      extensions: [
-        CustomButtonTheme(
-          normalStyle: _buildCustomButtonStyle(
-            baseBackgroundColor:
-                lightColors.buttonBackgroundColor, // أسود باللايت
-            baseTextColor: lightColors.buttonTextColor, // أبيض باللايت
-            disabledBackgroundColor: lightColors.buttonBackgroundColor
-                .changeOpacity(0.3),
-            disabledTextColor: lightColors.buttonTextColor.changeOpacity(0.5),
-          ),
-          wrongStyle: _buildCustomButtonStyle(
-            baseBackgroundColor: lightColors.dangerButtonColor, // أحمر ثابت
-            baseTextColor: Colors.white,
-            disabledBackgroundColor: lightColors.dangerButtonColor
-                .changeOpacity(0.3),
-            disabledTextColor: Colors.white.changeOpacity(0.5),
-          ),
-        ),
-      ],
 
       colorScheme: const ColorScheme.light().copyWith(
         primary: lightColors.activeDotColor,
@@ -256,6 +188,7 @@ class AppTheme {
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: lightColors.cardColor,
+        isDense: true,
         contentPadding: const EdgeInsets.all(16),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),

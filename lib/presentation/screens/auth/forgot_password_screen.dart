@@ -3,12 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_field/countries.dart';
 import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/global/localization/locale/app_localizations_setup.dart';
+import 'package:market_place_car/core/shared_component/custom_elevated_button.dart';
+import 'package:market_place_car/core/shared_component/back_icon_button.dart';
 import 'package:market_place_car/presentation/components/auth/auth_phone_text_field.dart';
-import 'package:market_place_car/presentation/components/shared_component/app_primary_button.dart';
-import 'package:market_place_car/presentation/components/shared_component/back_icon_button.dart';
 import 'package:market_place_car/presentation/controller/cubit/auth/auth_cubit.dart';
 import 'package:market_place_car/presentation/controller/cubit/auth/auth_state.dart';
-import 'package:market_place_car/presentation/helper/navigator_helper.dart';
 import 'package:market_place_car/presentation/helper/snack_bar_helper.dart';
 import 'package:market_place_car/presentation/screens/auth/verify_otp_screen.dart';
 
@@ -59,10 +58,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               error: false,
             );
 
-            NavigatorHelper.jump(
-              context,
-              screen: VerifyOtpScreen(phone: fullPhoneNumber),
-            );
+            // NavigatorHelper.jump(
+            //   context,
+            //   screen: VerifyOtpScreen(phone: fullPhoneNumber),
+            // );
           } else if (state is AuthError) {
             SnackBarHelper.showSnackBar(
               context,
@@ -119,7 +118,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   ),
                   context.addVerticalSpace(36),
 
-                  AppPrimaryButton(
+                  CustomElevatedButton(
                     text: l.send,
                     isLoading: isLoading,
                     onPressed: _submitForgotPassword,

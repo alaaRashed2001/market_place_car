@@ -1,5 +1,32 @@
 import 'package:flutter/material.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
+
+extension AppSizeResponsive on num {
+  double get getWidth => MediaQuery.sizeOf(navigatorKey.currentContext!).width;
+  double get getHeight =>
+      MediaQuery.sizeOf(navigatorKey.currentContext!).height;
+  Widget get h => SizedBox(height: getHeight * (this / 844));
+  Widget get w => SizedBox(width: getWidth * (this / 390));
+}
+
+extension FontExtension on num {
+  double get sp {
+    final context = navigatorKey.currentContext;
+    double width;
+
+    if (context != null) {
+      width = MediaQuery.sizeOf(context).width;
+    } else {
+      final window = WidgetsBinding.instance.platformDispatcher.views.first;
+      width = window.physicalSize.width / window.devicePixelRatio;
+    }
+
+    final scale = width / 300;
+    return (this * scale).clamp(this * 0.9, this * 1.15);
+  }
+}
+
 extension AppSizes on BuildContext {
   double get getWidth => MediaQuery.sizeOf(this).width;
   double get getHeight => MediaQuery.sizeOf(this).height;
@@ -12,19 +39,19 @@ extension AppSizes on BuildContext {
   bool get isSmallScreen => getHeight < 690;
 
   SizedBox addHorizontalSpace(double value) {
-    return SizedBox(width: getWidth * (value / 360));
+    return SizedBox(width: getWidth * (value / 390));
   }
 
   SizedBox addVerticalSpace(double value) {
-    return SizedBox(height: getHeight * (value / 800));
+    return SizedBox(height: getHeight * (value / 844));
   }
 
   double width(double value) {
-    return getWidth * (value / 360);
+    return getWidth * (value / 390);
   }
 
   double height(double value) {
-    return getHeight * (value / 800);
+    return getHeight * (value / 844);
   }
 
   EdgeInsets spaceAroundAll(double value) {
@@ -48,6 +75,7 @@ extension AppSizes on BuildContext {
       vertical: getHeight * (vertical / 800),
     );
   }
+
   EdgeInsets fromLTRB({
     required double left,
     required double top,
@@ -55,12 +83,13 @@ extension AppSizes on BuildContext {
     required double bottom,
   }) {
     return EdgeInsets.fromLTRB(
-      width(left),
-      height(top),
-      width(right),
-      height(bottom),
+      getWidth * (left / 360),
+      getHeight * (top / 800),
+      getWidth * (right / 360),
+      getHeight * (bottom / 800),
     );
   }
+
   EdgeInsetsDirectional spaceTop(double value) {
     return EdgeInsetsDirectional.only(top: getHeight * (value / 800));
   }

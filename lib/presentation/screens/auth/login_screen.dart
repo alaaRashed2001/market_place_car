@@ -5,23 +5,19 @@ import 'package:market_place_car/core/constants/app_images.dart';
 import 'package:market_place_car/core/extension/app_sizes.dart';
 import 'package:market_place_car/core/extension/text_style_extension.dart';
 import 'package:market_place_car/core/global/localization/locale/app_localizations_setup.dart';
+import 'package:market_place_car/core/shared_component/custom_elevated_button.dart';
+import 'package:market_place_car/core/shared_component/language_selector_widget.dart';
 import 'package:market_place_car/domain/repositories/auth/auth_repository.dart';
 import 'package:market_place_car/data/services/service_locator.dart';
 import 'package:market_place_car/presentation/components/auth/auth_phone_text_field.dart';
-import 'package:market_place_car/presentation/components/auth/auth_text_field.dart';
-import 'package:market_place_car/presentation/components/shared_component/app_primary_button.dart';
-import 'package:market_place_car/presentation/components/shared_component/app_text_button.dart';
+import 'package:market_place_car/core/shared_component/app_text_form_field.dart';
 import 'package:market_place_car/presentation/components/auth/social_login_row.dart';
-import 'package:market_place_car/presentation/components/shared_component/language_selector_widget.dart';
 import 'package:market_place_car/presentation/controller/cubit/auth/auth_cubit.dart';
 import 'package:market_place_car/presentation/controller/cubit/auth/auth_state.dart';
 import 'package:market_place_car/presentation/helper/app_asset_helper.dart';
 import 'package:market_place_car/presentation/helper/auth_validators.dart';
-import 'package:market_place_car/presentation/helper/navigator_helper.dart';
 import 'package:market_place_car/presentation/helper/snack_bar_helper.dart';
-import 'package:market_place_car/presentation/screens/auth/forgot_password_screen.dart';
-import 'package:market_place_car/presentation/screens/auth/sign_up_screen.dart';
-import 'package:market_place_car/presentation/screens/main_screen.dart';
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -70,11 +66,11 @@ class _LoginScreenState extends State<LoginScreen> {
               error: false,
             );
 
-            NavigatorHelper.jump(
-              context,
-              screen: const MainScreen(),
-              replace: true,
-            );
+            // NavigatorHelper.jump(
+            //   context,
+            //   screen: const MainScreen(),
+            //   replace: true,
+            // );
           } else if (state is AuthError) {
             SnackBarHelper.showSnackBar(
               context,
@@ -99,12 +95,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 context.addVerticalSpace(32),
 
-                Text(l.welcomeBack, style: context.titleBold18),
+                Text(l.welcomeBack, style: context.font18Bold),
                 context.addVerticalSpace(8),
                 Text(
                   l.signInSubtitle,
                   textAlign: TextAlign.center,
-                  style: context.bodyRegular14,
+                  style: context.font14Regular,
                 ),
                 context.addVerticalSpace(40),
 
@@ -120,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       context.addVerticalSpace(16),
 
-                      AuthTextField(
+                      AppTextFormField(
                         controller: _passwordController,
                         hintText: l.password,
                         obscure: true,
@@ -132,19 +128,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 context.addVerticalSpace(16),
                 LanguageSelectorWidget(),
-                Align(
-                  alignment: AlignmentDirectional.centerEnd,
-                  child: AppTextButton(
-                    text: l.forgotPassword,
-                    type: AppTextButtonStyleType.smallGray,
-                    onPressed: () => NavigatorHelper.jump(
-                      context,
-                      screen: const ForgotPasswordScreen(),
-                    ),
-                  ),
-                ),
+                // Align(
+                //   alignment: AlignmentDirectional.centerEnd,
+                //   child: AppTextButton(
+                //     text: l.forgotPassword,
+                //     type: AppTextButtonStyleType.smallGray,
+                //     onPressed: (){},
+                //     // onPressed: () => NavigatorHelper.jump(
+                //     //   context,
+                //     //   screen: const ForgotPasswordScreen(),
+                //     // ),
+                //   ),
+                // ),
                 context.addVerticalSpace(24),
-                AppPrimaryButton(
+                CustomElevatedButton(
                   text: l.signIn,
                   isLoading: isLoading,
                   onPressed: _submitLogin,
@@ -158,7 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
                         l.orContinueWith,
-                        style: context.bodyRegular14,
+                        style: context.font14Regular,
                       ),
                     ),
                     Expanded(child: Divider()),
@@ -171,13 +168,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(l.dontHaveAccount, style: context.bodyRegular14),
+                    Text(l.dontHaveAccount, style: context.font14Regular),
                     const SizedBox(width: 8),
                     GestureDetector(
-                      onTap: () => NavigatorHelper.jump(
-                        context,
-                        screen: const SignUpScreen(),
-                      ),
+                      // onTap: () => NavigatorHelper.jump(
+                      //   context,
+                      //   screen: const SignUpScreen(),
+                      // ),
                       child: Text(
                         l.signUp,
                         style: const TextStyle(
